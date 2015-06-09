@@ -9,10 +9,10 @@
 		<div id="wrapper">
 				<header>
 					<section id="title_section">	 FURRYCARE </section>
-					<nav id="main_nav">
+					<nav id="main_nav" ng-controller="MainNavCtrl">
 						<ul>
-								<li> <a href="#"> ANIMALS </a> </li>
-								<li> <a href=".html"> ALERTS </a> </li>
+								<li data-ng-click="checkSelectedLink('animals')" ng-class="{'active' : isActive('animals')}"> <a href="#"> ANIMALS </a> </li>
+								<li data-ng-click="checkSelectedLink('alerts')" ng-class="{'active' : isActive('alerts')}"> <a href=".html"> ALERTS </a> </li>
 						</ul>
 					</nav>
 				</header>
@@ -20,7 +20,7 @@
 						<nav id="animal_nav">
 						<ul>
 								<li> <a href="#"> 					ANIMAL 1 		</a> </li>
-								<li> <a href="about.html"> 	ANIMAL 2		</a> </li>
+								<li> <a href="about.html"> 			ANIMAL 2		</a> </li>
 								<li> <a href="#">					ANIMAL 3	 	</a> </li>
 								<li> <a href="#"> 					ANIMAL 4		</a> </li>
 								<li> <a href="#"> 					ANIMAL 5		</a> </li>

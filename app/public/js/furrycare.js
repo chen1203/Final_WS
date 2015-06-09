@@ -7,10 +7,22 @@ furrycareApp.controller('FurryCtrl', function($scope,$http) {
 		$scope.user = data;
 		console.log("user name : "+$scope.user.userName);
 	});
-	
 
 });
 
+furrycareApp.controller('MainNavCtrl',function($scope){
+    //in first run the selected li in main nav be the alerts
+    $scope.selectedMainNavLink = 'alerts';
+    // when user click on one of this link he send 'string'
+    $scope.checkSelectedLink = function (nowSelectedLink) {
+        $scope.selectedMainNavLink = nowSelectedLink;
+    };
+    // then the class check if is active by the 'string' above
+    $scope.isActive = function (nowSelectedLink) {
+        return $scope.selectedMainNavLink === nowSelectedLink;
+    };
+
+});
 furrycareApp.controller('ListController', function ($scope) {
     
     $scope.open = function(item){

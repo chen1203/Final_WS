@@ -49,6 +49,12 @@ a{
 		float: left;
 		text-align: center;
 	}
+	.active {
+		background:#000000;
+	}
+	.active>a {
+		color: #ffffff;
+	}
 
 	#animal_nav {
 		width: 100%;
