@@ -13,11 +13,11 @@ furrycareApp.controller('FurryCtrl', function($scope,$http) {
 furrycareApp.controller('MainNavCtrl',function($scope){
     //in first run the selected li in main nav be the alerts
     $scope.selectedMainNavLink = 'alerts';
-    // when user click on one of this link he send 'string'
+    // when user click on one of mainNav link he send a 'string' contain the name of li
     $scope.checkSelectedLink = function (nowSelectedLink) {
         $scope.selectedMainNavLink = nowSelectedLink;
     };
-    // then the class check if is active by the 'string' above
+    // then the li class check if is active by the 'string' above
     $scope.isActive = function (nowSelectedLink) {
         return $scope.selectedMainNavLink === nowSelectedLink;
     };
