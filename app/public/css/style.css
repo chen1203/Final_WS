@@ -1,0 +1,157 @@
+/* FOR ALL */
+* {
+	margin:0;
+	padding:0;	
+}
+header,nav,article,footer,aside,main,section{
+	display:block;
+}
+ul,li{
+	text-decoration: none;
+	list-style-type: none;
+}
+a{
+	text-decoration: none;
+	color:black;
+}
+
+.clear {
+	clear: both;
+}
+
+@media (max-width: 500px){
+	
+	#wrapper{
+		width:100%;
+		margin:0 auto;
+		background-color: pink;
+	}
+	#title_section{
+		width: 100%;
+		height: 25px;
+		background-color: #000000;
+		color: #ffffff;
+		text-align: center;
+		font-family: arial,sans-serif;	
+		padding-top: 3px;
+	}
+	
+	#main_nav {
+		width: 100%;
+		height: 25px;
+		background-color: #ffffff;
+		font-family: arial,sans-serif;
+		color: #000000;
+	}
+
+	#main_nav li {
+		width: 49.55%;
+		float: left;
+		text-align: center;
+	}
+
+	#animal_nav {
+		width: 100%;
+		height: 25px;
+		background-color: #ffffff;
+		font-family: arial,sans-serif;
+		color: #000000;	
+		border-top: 1px solid #CBCBCB;
+		border-bottom: 1px solid #CBCBCB;
+	}
+
+	#animal_nav li {
+		width: 19.55%;
+		float: left;
+		text-align: center;
+		border-left: 1px solid #CBCBCB;
+		margin-top: 4px;
+	}
+	
+	#animal_nav li:nth-child(1) {
+		border: none;
+	}
+
+	#simple_details {
+		width: 100%;
+	}
+
+	#simple_details>section {
+		width: 100%;
+		font-family: arial,sans-serif;
+		border-bottom: 1px solid #CBCBCB;
+		padding: 10px 0px 10px 10px;
+	}
+
+	#complex_details{
+		width: 100%;
+		padding-top: 10px;
+	}
+
+	.scroll_list {
+		width: 80%;
+		margin: 0 auto;
+		border: 1px solid #CBCBCB;
+	}
+
+	/* first li of section scroll_list */
+	.scroll_list_title {
+		width:100%;
+		border-bottom: 1px solid #CBCBCB;
+	}
+
+	.scroll_list_title>section {
+		float: left;
+	}
+
+	.scroll_list_title>section:nth-child(1){
+		width:80%;
+		background-color: yellow;
+	}
+
+	.scroll_list_title>section:nth-child(2){
+		padding-left: 10%;
+		font-weight: bold;
+	}
+
+	/* last li of section scroll_list */
+	.scroll_list_arrow {
+		width:100%;
+		border-top: 1px solid #CBCBCB;	
+	}
+	
+	.scroll_list_arrow>section {
+		width:25%;
+		background-color: blue;
+		margin: 0 auto;
+	}
+
+	/* all other sections  */
+	.scroll_list_item{
+		width: 100%;
+	}
+
+	.scroll_list_item>section {
+		float: left;
+	}
+
+	.scroll_list_item>section:nth-child(1) {
+		background-color: red;
+		width: 30%;
+	}
+
+	.scroll_list_item>section:nth-child(2) {
+		background-color: purple;
+		width: 70%;
+	}
+
+	.scroll_list_item>section:nth-child(2)>section {
+		width:100%;
+		position: relative;
+	}
+
+	.edit_button{
+		position: absolute;
+		right: 2%;
+	}
+}

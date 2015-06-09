@@ -1,34 +1,68 @@
 <!DOCTYPE html>
 <html ng-app="furrycareApp">
 	<head>
-		<title>Furry Care app</title>
-		<link rel="stylesheet" type="text/css" href="css/bootstrap.min.css">
-		<link rel="stylesheet" type="text/css" href="css/bootstrap-theme.min.css">
+			<meta charset="UTF-8">
+			<link rel="stylesheet" href="css/style.css">
+			<title> Furry Care </title>
 	</head>
-	<body ng-controller="FurryCtrl">
-		<div class="page-header">
-			<h1>User name : {{user.userName}}</h1>
-			</span>
+	<body id="hp" ng-controller="FurryCtrl">
+		<div id="wrapper">
+				<header>
+					<section id="title_section">	 FURRYCARE </section>
+					<nav id="main_nav">
+						<ul>
+								<li> <a href="#"> ANIMALS </a> </li>
+								<li> <a href=".html"> ALERTS </a> </li>
+						</ul>
+					</nav>
+				</header>
+				<main>
+						<nav id="animal_nav">
+						<ul>
+								<li> <a href="#"> 					ANIMAL 1 		</a> </li>
+								<li> <a href="about.html"> 	ANIMAL 2		</a> </li>
+								<li> <a href="#">					ANIMAL 3	 	</a> </li>
+								<li> <a href="#"> 					ANIMAL 4		</a> </li>
+								<li> <a href="#"> 					ANIMAL 5		</a> </li>
+						</ul>
+					</nav>
+					<section id="simple_details">
+						<section>Name: Luther</section>
+						<section>Type: Pakinese</section>
+						<section>Age: 8 years</section>
+						<section>Weight: 5 kg</section>					
+					</section>
+					<section id="complex_details">
+							<section class="scroll_list">
+								<ul ng-controller="ListController">
+								    <li class="scroll_list_title">
+								    	<section> Vaccination Header </section>
+								    	<section> + </section>
+								    	<div class="clear"></div>
+								    </li>
+								    <ng-switch on="anyItemOpen()">
+								    <section ng-switch-when="true">
+								       	<article class="scroll_list_item" ng-controller="ItemController">
+								       		<section>image</section>
+								       		<section>
+								       			<section>
+								       				<section class="edit_button">edit button</section>
+								       			</section>
+								       			<section>title</section>
+								       			<section>description</section>
+								       		</section>	  	  
+								       		<div class="clear"></div>
+								       	</article> 
+								     </section>
+								    </ng-switch> 
+								    <li class="scroll_list_arrow" ng-controller="ItemController">
+								       <section ng-click='open("open")'>arrow</section>        
+									</li>  
+								</ul>
+							</section>
+					</section>
+				</main>
 		</div>
-		<div class="panel">
-			<table class="table table-striped">
-				<thead>
-					<tr>
-						<th>animal name</th>
-						<th>service location</th>
-					</tr>
-				</thead>
-				<tbody>
-					<tr ng-repeat="animal in user.animals">  
-					<!--  its like a foreach in js, instead of item we can write anything -->
-						<td>{{animal.animalName}}</td>
-						<td>{{animal.animalService[0].serviceAddress}}</td>
-					</tr>
-				</tbody>
-			</table>
-			
-		</div>
-
 		<script src="js/lib/angular/angular.min.js"> </script>
 		<script src="js/furrycare.js"> </script>
 	</body>
