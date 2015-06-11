@@ -12,7 +12,7 @@ furrycareApp.controller('FurryCtrl', function($scope,$http) {
 
 furrycareApp.controller('MainNavCtrl',function($scope){
     //in first run the selected li in main nav be the alerts
-    $scope.selectedMainNavLink = 'alerts';
+    $scope.selectedMainNavLink = 'animals';
     // when user click on one of mainNav link he send a 'string' contain the name of li
     $scope.checkSelectedLink = function (nowSelectedLink) {
         $scope.selectedMainNavLink = nowSelectedLink;
@@ -21,8 +21,8 @@ furrycareApp.controller('MainNavCtrl',function($scope){
     $scope.isActive = function (nowSelectedLink) {
         return $scope.selectedMainNavLink === nowSelectedLink;
     };
-
 });
+
 furrycareApp.controller('ListController', function ($scope) {
     
     $scope.open = function(item){

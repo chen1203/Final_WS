@@ -11,26 +11,46 @@
 					<section id="title_section">	 FURRYCARE </section>
 					<nav id="main_nav" ng-controller="MainNavCtrl">
 						<ul>
-								<li data-ng-click="checkSelectedLink('animals')" ng-class="{'active' : isActive('animals')}"> <a href="#"> ANIMALS </a> </li>
-								<li data-ng-click="checkSelectedLink('alerts')" ng-class="{'active' : isActive('alerts')}"> <a href=".html"> ALERTS </a> </li>
+								<li data-ng-click="checkSelectedLink('animals')" ng-class="{'active' : isActive('animals')}"> 
+									<a href="#"> <img src="images/animals_icon.png"> </a> 
+								</li>
+								<li data-ng-click="checkSelectedLink('alerts')" ng-class="{'active' : isActive('alerts')}"> 
+									<a href="alerts.html"> <img src="images/alerts_icon.png"> </a> 
+								</li>
 						</ul>
 					</nav>
 				</header>
 				<main>
 						<nav id="animal_nav">
 						<ul>
-								<li> <a href="#"> 					ANIMAL 1 		</a> </li>
-								<li> <a href="#">		 			ANIMAL 2		</a> </li>
-								<li> <a href="#">					ANIMAL 3	 	</a> </li>
-								<li> <a href="#"> 					ANIMAL 4		</a> </li>
-								<li> <a href="#"> 					ANIMAL 5		</a> </li>
+								<li> <a href="#"> <img src="images/animal1.png">	</a> </li>
+								<li> <a href="#"> <img src="images/animal2.png">	</a> </li>
+								<li> <a href="#"> <img src="images/animal2.png">	</a> </li>
+								<li> <a href="#"> <img src="images/animal2.png">	</a> </li>
+								<li> <a href="#"> <img src="images/animal1.png">	</a> </li>
 						</ul>
 					</nav>
 					<section id="simple_details">
-						<section>Name: Luther</section>
-						<section>Type: Pakinese</section>
-						<section>Age: 8 years</section>
-						<section>Weight: 5 kg</section>					
+						<section>
+							<section class="simple_detail_edit_img"> <img src="images/edit.png"> </section>
+							<section class="simple_detail_desc"> <section> Name: Luther </section> </section>
+							<div class="clear"></div>
+						</section>
+						<section>
+							<section class="simple_detail_edit_img"> <img src="images/edit.png"> </section>
+							<section class="simple_detail_desc"> <section> Type: Pakinese </section> </section>
+							<div class="clear"></div>
+						</section>
+						<section>
+							<section class="simple_detail_edit_img"> <img src="images/edit.png"> </section>
+							<section class="simple_detail_desc"> <section> Age: 8 years </section> </section>
+							<div class="clear"></div>
+						</section>
+						<section>
+							<section class="simple_detail_edit_img"> <img src="images/edit.png"> </section>
+							<section class="simple_detail_desc"> <section> Weight: 5 kg </section> </section>
+							<div class="clear"></div>
+						</section>			
 					</section>
 					<section id="complex_details">
 							<section class="scroll_list">

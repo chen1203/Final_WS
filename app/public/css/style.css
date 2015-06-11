@@ -1,3 +1,5 @@
+@import url(http://fonts.googleapis.com/css?family=Open+Sans);
+
 /* FOR ALL */
 * {
 	margin:0;
@@ -14,40 +16,47 @@ a{
 	text-decoration: none;
 	color:black;
 }
-
 .clear {
 	clear: both;
 }
 
-@media (max-width: 500px){
-	
+@media (max-width: 500px){	
 	#wrapper{
 		width:100%;
 		margin:0 auto;
-		background-color: pink;
 	}
 	#title_section{
 		width: 100%;
-		height: 25px;
+		height: 30px;
 		background-color: #000000;
 		color: #ffffff;
 		text-align: center;
-		font-family: arial,sans-serif;	
-		padding-top: 3px;
+		font-family: Open Sans,arial,sans-serif;	
+		padding-top: 10px;
 	}
-	
 	#main_nav {
 		width: 100%;
-		height: 25px;
+		height: 35px;
 		background-color: #ffffff;
-		font-family: arial,sans-serif;
+		font-family: Open Sans,arial,sans-serif;
 		color: #000000;
 	}
-
+	#main_nav>ul {
+		height: 100%;
+	}
 	#main_nav li {
-		width: 49.55%;
+		width: 50%;
+		height: 100%;
 		float: left;
 		text-align: center;
+	}
+	#main_nav a {
+		display: block;	/* ASK TOM */
+		padding-top: 5px;
+	}
+	#main_nav img {
+		width: 20px;
+		height: 20px;
 	}
 	.active {
 		background:#000000;
@@ -55,107 +64,128 @@ a{
 	.active>a {
 		color: #ffffff;
 	}
-
 	#animal_nav {
 		width: 100%;
-		height: 25px;
+		height: 75px;
 		background-color: #ffffff;
-		font-family: arial,sans-serif;
+		font-family: Open Sans,arial,sans-serif;
 		color: #000000;	
 		border-top: 1px solid #CBCBCB;
 		border-bottom: 1px solid #CBCBCB;
 	}
-
+	#animal_nav>ul {
+		height: 100%;
+	}
 	#animal_nav li {
-		width: 19.55%;
+		width: 19.83%;
+		height: 100%;
 		float: left;
 		text-align: center;
 		border-left: 1px solid #CBCBCB;
-		margin-top: 4px;
 	}
-	
 	#animal_nav li:nth-child(1) {
 		border: none;
 	}
-
+	#animal_nav a {
+		height: 100%;
+		display: block;
+	}
+	#animal_nav img {
+		display: block;
+	}
 	#simple_details {
 		width: 100%;
 	}
-
 	#simple_details>section {
 		width: 100%;
-		font-family: arial,sans-serif;
+		height: 50px;
+		font-family: Open Sans,arial,sans-serif;
 		border-bottom: 1px solid #CBCBCB;
-		padding: 10px 0px 10px 10px;
+		/*padding: 10px 0px 10px 10px; */
 	}
-
+	/*#simple_details>section>section{*/
+	.simple_detail_edit_img, .simple_detail_desc {	
+		float:left;
+		height: 100%;
+		position: relative;
+	}
+	/* section that holds the edit img  */
+	.simple_detail_edit_img {	
+		width: 19.7%;
+		height: 100%;
+		border-right : 1px solid #CBCBCB;
+	}
+	.simple_detail_edit_img>img {
+		display: block;
+		width: 30px;
+		height: 30px;
+		position: absolute;
+		left: 30%;
+		top: 15%;
+	}
+	.simple_detail_desc {	
+		width: 80%;
+		height: 100%;
+	}
+	.simple_detail_desc>section {
+		position: absolute;
+		left: 8%;
+		top: 28%;
+	}
 	#complex_details{
 		width: 100%;
 		padding-top: 10px;
 	}
-
 	.scroll_list {
 		width: 80%;
 		margin: 0 auto;
 		border: 1px solid #CBCBCB;
 	}
-
 	/* first li of section scroll_list */
 	.scroll_list_title {
 		width:100%;
 		border-bottom: 1px solid #CBCBCB;
 	}
-
 	.scroll_list_title>section {
 		float: left;
 	}
-
 	.scroll_list_title>section:nth-child(1){
 		width:80%;
 		background-color: yellow;
 	}
-
 	.scroll_list_title>section:nth-child(2){
 		padding-left: 10%;
 		font-weight: bold;
 	}
-
 	/* last li of section scroll_list */
 	.scroll_list_arrow {
 		width:100%;
 		border-top: 1px solid #CBCBCB;	
 	}
-	
 	.scroll_list_arrow>section {
 		width:25%;
 		background-color: blue;
 		margin: 0 auto;
 	}
-
 	/* all other sections  */
 	.scroll_list_item{
 		width: 100%;
 	}
-
 	.scroll_list_item>section {
 		float: left;
 	}
-
 	.scroll_list_item>section:nth-child(1) {
 		background-color: red;
 		width: 30%;
 	}
-
 	.scroll_list_item>section:nth-child(2) {
 		background-color: purple;
 		width: 70%;
 	}
-
 	.scroll_list_item>section:nth-child(2)>section {
 		width:100%;
 		position: relative;
 	}
-
 	.edit_button{
 		position: absolute;
 		right: 2%;

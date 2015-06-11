@@ -1,4 +1,4 @@
-function ItemController($scope) {
+/*function ItemController($scope) {
 }
 
 function ListController($scope) {
@@ -22,4 +22,4 @@ function ListController($scope) {
     $scope.close = function() {
         $scope.opened = undefined;
     };
-}
+}*/

@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html ng-app="furrycareApp">
+	<head>
+			<meta charset="UTF-8">
+			<link rel="stylesheet" href="css/style.css">
+			<title> Furry Care </title>
+	</head>
+	<body id="hp" ng-controller="FurryCtrl">
+		<div id="wrapper">
+				<header>
+					<section id="title_section">	 FURRYCARE </section>
+					<nav id="main_nav" ng-controller="MainNavCtrl">
+						<ul>
+								<li data-ng-click="checkSelectedLink('animals')" ng-class="{'active' : isActive('animals')}"> 
+									<a href="index.html"> <img src="images/animals_icon.png"> </a> 
+								</li>
+								<li data-ng-click="checkSelectedLink('alerts')" ng-class="{'active' : isActive('alerts')}"> 
+									<a href="#"> <img src="images/alerts_icon.png"> </a> 
+								</li>
+						</ul>
+					</nav>
+				</header>
+				<main>
+					
+				</main>
+		</div>
+		<script src="js/lib/angular/angular.min.js"> </script>
+		<script src="js/furrycare.js"> </script>
+	</body>
+</html>
