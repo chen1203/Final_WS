@@ -8,7 +8,7 @@
 	<body id="hp" ng-controller="FurryCtrl">
 		<div id="wrapper">
 				<header>
-					<section id="title_section">	 FURRYCARE </section>
+					<section id="title_section"> <h1> FURRYCARE </h1> </section>
 					<nav id="main_nav" ng-controller="MainNavCtrl">
 						<ul>
 								<li data-ng-click="checkSelectedLink('animals')" ng-class="{'active' : isActive('animals')}"> 
@@ -17,38 +17,44 @@
 								<li data-ng-click="checkSelectedLink('alerts')" ng-class="{'active' : isActive('alerts')}"> 
 									<a href="alerts.html"> <img src="images/alerts_icon.png"> </a> 
 								</li>
+								<div class="clear"> </div>
 						</ul>
 					</nav>
 				</header>
 				<main>
-						<nav id="animal_nav">
-						<ul>
-								<li> <a href="#"> <img src="images/animal1.png">	</a> </li>
-								<li> <a href="#"> <img src="images/animal2.png">	</a> </li>
-								<li> <a href="#"> <img src="images/animal2.png">	</a> </li>
-								<li> <a href="#"> <img src="images/animal2.png">	</a> </li>
-								<li> <a href="#"> <img src="images/animal1.png">	</a> </li>
-						</ul>
+					<nav id="animal_nav">
+						<ul ng-repeat="animal in user.animals">
+								 <li> <a href="#"> <img ng-src="images/{{animal.animalPic}}"></a> </li>
+						</ul> 
+						<div class="clear"> </div>
 					</nav>
 					<section id="simple_details">
 						<section>
 							<section class="simple_detail_edit_img"> <img src="images/edit.png"> </section>
-							<section class="simple_detail_desc"> <section> Name: Luther </section> </section>
+							<section class="simple_detail_desc"> 
+								<section> Name: {{user.animals[0].animalName}} </section> 
+							</section>
 							<div class="clear"></div>
 						</section>
 						<section>
 							<section class="simple_detail_edit_img"> <img src="images/edit.png"> </section>
-							<section class="simple_detail_desc"> <section> Type: Pakinese </section> </section>
+							<section class="simple_detail_desc"> 
+								<section> Type: {{user.animals[0].animalType}} </section> 
+							</section>
 							<div class="clear"></div>
 						</section>
 						<section>
 							<section class="simple_detail_edit_img"> <img src="images/edit.png"> </section>
-							<section class="simple_detail_desc"> <section> Age: 8 years </section> </section>
+							<section class="simple_detail_desc"> 
+								<section> Age: {{user.animals[0].animalAge}} years </section> 
+							</section>
 							<div class="clear"></div>
 						</section>
 						<section>
 							<section class="simple_detail_edit_img"> <img src="images/edit.png"> </section>
-							<section class="simple_detail_desc"> <section> Weight: 5 kg </section> </section>
+							<section class="simple_detail_desc"> 
+								<section> Weight: {{user.animals[0].animalWeight}} kg </section> 
+							</section>
 							<div class="clear"></div>
 						</section>			
 					</section>
@@ -57,19 +63,72 @@
 								<ul ng-controller="ListController">
 								    <li class="scroll_list_title">
 								    	<section> Vaccination Header </section>
-								    	<section> + </section>
+								    	<section> <img src="images/add.png"> </section>
 								    	<div class="clear"></div>
 								    </li>
 								    <ng-switch on="anyItemOpen()">
-								    <section ng-switch-when="true">
+								    <section ng-switch-when="true" 
+								    			ng-repeat="vaccination in user.animals[0].animalVaccination">
 								       	<article class="scroll_list_item" ng-controller="ItemController">
-								       		<section>image</section>
+								       		<section><img src="images/vaccination.png"></section>
 								       		<section>
 								       			<section>
-								       				<section class="edit_button">edit button</section>
+								       				<section class="edit_button"><img src="images/edit.png"></section>
 								       			</section>
-								       			<section>title</section>
-								       			<section>description</section>
+								       			<section class="scroll_list_row_details">{{vaccination.vaccinationName}}</section>
+								       			<section class="scroll_list_row_details">{{vaccination.vaccinationDate}}</section>
+								       		</section>	  	  
+								       		<div class="clear"></div>
+								       	</article> 
+								     </section>
+								    </ng-switch> 
+								    <li class="scroll_list_arrow" ng-controller="ItemController">
+								       <section ng-click='open("open")'>arrow</section>        
+									</li>  
+								</ul>
+								<ul ng-controller="ListController">
+								    <li class="scroll_list_title">
+								    	<section> Food Header </section>
+								    	<section> <img src="images/add.png"> </section>
+								    	<div class="clear"></div>
+								    </li>
+								    <ng-switch on="anyItemOpen()">
+								    <section ng-switch-when="true" 
+								    			ng-repeat="food in user.animals[0].animalFood">
+								       	<article class="scroll_list_item" ng-controller="ItemController">
+								       		<section><img src="images/food.png"></section>
+								       		<section>
+								       			<section>
+								       				<section class="edit_button"><img src="images/edit.png"></section>
+								       			</section>
+								       			<section class="scroll_list_row_details">{{food.foodName}} , {{food.foodBrand}}</section>
+								       			<section class="scroll_list_row_details">{{food.foodBagPrice}}</section>
+								       		</section>	  	  
+								       		<div class="clear"></div>
+								       	</article> 
+								     </section>
+								    </ng-switch> 
+								    <li class="scroll_list_arrow" ng-controller="ItemController">
+								       <section ng-click='open("open")'>arrow</section>        
+									</li>  
+								</ul>
+								<ul ng-controller="ListController">
+								    <li class="scroll_list_title">
+								    	<section> Care Header </section>
+								    	<section> <img src="images/add.png"> </section>
+								    	<div class="clear"></div>
+								    </li>
+								    <ng-switch on="anyItemOpen()">
+								    <section ng-switch-when="true" 
+								    			ng-repeat="care in user.animals[0].animalCare">
+								       	<article class="scroll_list_item" ng-controller="ItemController">
+								       		<section><img src="images/care.png"></section>
+								       		<section>
+								       			<section>
+								       				<section class="edit_button"><img src="images/edit.png"></section>
+								       			</section>
+								       			<section class="scroll_list_row_details">{{care.careType}}</section>
+								       			<section class="scroll_list_row_details">Date: {{care.careDate}}</section>
 								       		</section>	  	  
 								       		<div class="clear"></div>
 								       	</article> 
