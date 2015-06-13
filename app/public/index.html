@@ -32,14 +32,7 @@
 						<section>
 							<section class="simple_detail_edit_img"> <img src="images/edit.png"> </section>
 							<section class="simple_detail_desc"> 
-								<section> Name: {{user.animals[0].animalName}} </section> 
-							</section>
-							<div class="clear"></div>
-						</section>
-						<section>
-							<section class="simple_detail_edit_img"> <img src="images/edit.png"> </section>
-							<section class="simple_detail_desc"> 
-								<section> Type: {{user.animals[0].animalType}} </section> 
+								<section> {{user.animals[0].animalName}} </section> 
 							</section>
 							<div class="clear"></div>
 						</section>
@@ -83,7 +76,7 @@
 								     </section>
 								    </ng-switch> 
 								    <li class="scroll_list_arrow" ng-controller="ItemController">
-								       <section ng-click='open("open")'>arrow</section>        
+								       <section ng-click='open("open")'><img src="images/arrow_down.png"></section>        
 									</li>  
 								</ul>
 								<ul ng-controller="ListController">
@@ -109,7 +102,7 @@
 								     </section>
 								    </ng-switch> 
 								    <li class="scroll_list_arrow" ng-controller="ItemController">
-								       <section ng-click='open("open")'>arrow</section>        
+								       <section ng-click='open("open")'><img src="images/arrow_down.png"></section>        
 									</li>  
 								</ul>
 								<ul ng-controller="ListController">
@@ -135,7 +128,7 @@
 								     </section>
 								    </ng-switch> 
 								    <li class="scroll_list_arrow" ng-controller="ItemController">
-								       <section ng-click='open("open")'>arrow</section>        
+								       <section ng-click='open("open")'><img src="images/arrow_down.png"></section>        
 									</li>  
 								</ul>
 							</section>

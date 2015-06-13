@@ -10,7 +10,6 @@ var userSchema = new schema({
             animalId: {type: Number, unique: true, required: true},
             animalName: {type: String, required: true},
             animalAge: {type: Number},
-            animalType: {type: String},
             animalWeight: {type: Number},
             animalPic: {type: String},  //add default
             animalFood: [

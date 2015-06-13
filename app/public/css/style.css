@@ -159,11 +159,11 @@ a{
 		font-size: 14px;
 	}
 	.scroll_list_title>section {
+		padding-top: 5px;
 		float: left;
 	}
 	.scroll_list_title>section:nth-child(1){
-		width: 88%;
-		padding-top: 5px;
+		width: 86%;
 		padding-left: 8px;
 		/*background-color: yellow;*/
 	}
@@ -182,8 +182,12 @@ a{
 	}
 	.scroll_list_arrow>section {
 		width:25%;
-		/*background-color: blue;*/
+	/*	background-color: blue;*/
 		margin: 0 auto;
+	}
+	.scroll_list_arrow img {
+		width: 50px;
+		height: 30px;
 	}
 	/* all other sections  */
 	.scroll_list_item{
