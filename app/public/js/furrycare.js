@@ -6,7 +6,16 @@ furrycareApp.controller('FurryCtrl', function($scope,$http) {
 		console.log(data);
 		$scope.user = data;
 		console.log("user name : "+$scope.user.userName);
+        $scope.currAnimal = data.animals[0];
 	});
+
+    $scope.checkSelectedAnimal = function(id) {
+        console.log("id= "+id);
+        $scope.currAnimal = $scope.user.animals[id]; 
+    };
+    $scope.isActive = function (nowSelectedAnimalLink) {
+        return $scope.currAnimal.animalId === nowSelectedAnimalLink;
+    };
 
 });
 

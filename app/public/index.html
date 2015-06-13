@@ -12,7 +12,7 @@
 					<nav id="main_nav" ng-controller="MainNavCtrl">
 						<ul>
 								<li data-ng-click="checkSelectedLink('animals')" ng-class="{'active' : isActive('animals')}"> 
-									<a href="#"> <img src="images/animals_icon.png"> </a> 
+									<a href="#"> <imganimal src="images/animals_icon.png"> </a> 
 								</li>
 								<li data-ng-click="checkSelectedLink('alerts')" ng-class="{'active' : isActive('alerts')}"> 
 									<a href="alerts.html"> <img src="images/alerts_icon.png"> </a> 
@@ -24,7 +24,10 @@
 				<main>
 					<nav id="animal_nav">
 						<ul ng-repeat="animal in user.animals">
-								 <li> <a href="#"> <img ng-src="images/{{animal.animalPic}}"></a> </li>
+								 <li data-ng-click="checkSelectedAnimal(animal.animalId-1)" 
+								 					ng-class="{'active' : isActive(animal.animalId)}"> 
+								 	<a href="#"> <img ng-src="images/{{animal.animalPic}}"></a> 
+								 </li>
 						</ul> 
 						<div class="clear"> </div>
 					</nav>
@@ -32,21 +35,21 @@
 						<section>
 							<section class="simple_detail_edit_img"> <img src="images/edit.png"> </section>
 							<section class="simple_detail_desc"> 
-								<section> {{user.animals[0].animalName}} </section> 
+								<section> {{currAnimal.animalName}} </section> 
 							</section>
 							<div class="clear"></div>
 						</section>
 						<section>
 							<section class="simple_detail_edit_img"> <img src="images/edit.png"> </section>
 							<section class="simple_detail_desc"> 
-								<section> Age: {{user.animals[0].animalAge}} years </section> 
+								<section> Age: {{currAnimal.animalAge}} years </section> 
 							</section>
 							<div class="clear"></div>
 						</section>
 						<section>
 							<section class="simple_detail_edit_img"> <img src="images/edit.png"> </section>
 							<section class="simple_detail_desc"> 
-								<section> Weight: {{user.animals[0].animalWeight}} kg </section> 
+								<section> Weight: {{currAnimal.animalWeight}} kg </section> 
 							</section>
 							<div class="clear"></div>
 						</section>			
@@ -61,7 +64,7 @@
 								    </li>
 								    <ng-switch on="anyItemOpen()">
 								    <section ng-switch-when="true" 
-								    			ng-repeat="vaccination in user.animals[0].animalVaccination">
+								    			ng-repeat="vaccination in currAnimal.animalVaccination">
 								       	<article class="scroll_list_item" ng-controller="ItemController">
 								       		<section><img src="images/vaccination.png"></section>
 								       		<section>
@@ -87,7 +90,7 @@
 								    </li>
 								    <ng-switch on="anyItemOpen()">
 								    <section ng-switch-when="true" 
-								    			ng-repeat="food in user.animals[0].animalFood">
+								    			ng-repeat="food in currAnimal.animalFood">
 								       	<article class="scroll_list_item" ng-controller="ItemController">
 								       		<section><img src="images/food.png"></section>
 								       		<section>
@@ -113,7 +116,7 @@
 								    </li>
 								    <ng-switch on="anyItemOpen()">
 								    <section ng-switch-when="true" 
-								    			ng-repeat="care in user.animals[0].animalCare">
+								    			ng-repeat="care in currAnimal.animalCare">
 								       	<article class="scroll_list_item" ng-controller="ItemController">
 								       		<section><img src="images/care.png"></section>
 								       		<section>
