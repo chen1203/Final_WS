@@ -32,8 +32,9 @@ furrycareApp.controller('FurryCtrl', function($scope,$http) {
     $scope.createFoodNoti = function(type,name,weight,dailyUse) {
         console.log("create notification to food.");
         console.log(type);
-
+        daysleft = (weight * 1000) / dailyUse;
         // NEED TO CALCULATE DATE HERE!!!!
+        // add daysleft for today date....
         var dateToExp = '1.1.11';
         // push it to db
         $http.get('http://localhost:3000/setnewalarm?alarmtype='+type+'&alarmname='+name+'&expdate='+dateToExp).success(function (data){

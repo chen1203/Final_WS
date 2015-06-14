@@ -3,6 +3,11 @@ var app = express();
 var url = require('url');
 var authenticateUser = require('./furryController');
 
+var Alarm = function(type,name,expdate){
+	type = type;
+	name = name;
+	expdate = expdate;
+};
 app.use('/', express.static('./public'));
 
 app.get('/get', function(req,res){
@@ -28,7 +33,7 @@ console.log("set net alarm");
 	var alarmExpDate= query.expdate;
 	console.log("new alarm reported: \nAlarm Type: "+query.alarmtype+"\nAlarm Name: "+query.alarmname+"\nExp. Date: "+query.expdate);
 	// Create and push the alarm to db here!!
-
+	var newAlarm = Alarm(alarmType,alarmName,alarmExpDate);
 
 	// we return the updated user
 	res.header("Access-Control-Allow-Origin", "*");
