@@ -7,6 +7,7 @@ furrycareApp.controller('FurryCtrl', function($scope,$http) {
 		$scope.user = data;
 		console.log("user name : "+$scope.user.userName);
         $scope.currAnimal = data.animals[0];
+        console.log("exp : "+ $scope.currAnimal.animalCare[0].careExpire);
 	});
 
     $scope.checkSelectedAnimal = function(id) {
@@ -15,6 +16,16 @@ furrycareApp.controller('FurryCtrl', function($scope,$http) {
     };
     $scope.isActive = function (nowSelectedAnimalLink) {
         return $scope.currAnimal.animalId === nowSelectedAnimalLink;
+    };
+
+    $scope.createVaccNoti = function(dateToExp) {
+        console.log("create notification to vaccination.");
+        console.log(dateToExp);
+        // create alarm object
+        
+        // push it to db
+        
+        // create notify ?
     };
 
 });

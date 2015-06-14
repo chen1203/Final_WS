@@ -8,7 +8,7 @@ var authenticateUser;
 mongoose.connection.once('open',function(){
 	var userM = this.model('userM');
 
-	var query = userM.findOne( {'email':'tomcohent@gmail.com'});
+	var query = userM.findOne({'email':'tomcohent@gmail.com'});
 
 /*	query.where('email').e('tomcohent@gmail.com'); */
 	query.exec(function(err,docs){
