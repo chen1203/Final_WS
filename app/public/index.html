@@ -11,10 +11,10 @@
 					<section id="title_section"> <h1> FURRYCARE </h1> </section>
 					<nav id="main_nav" ng-controller="MainNavCtrl">
 						<ul>
-								<li data-ng-click="checkSelectedLink('animals')" ng-class="{'active' : isActive('animals')}"> 
-									<a href="#"> <imganimal src="images/animals_icon.png"> </a> 
+								<li data-ng-click="checkSelectedLink('index.html')" ng-class="{'active' : isActive('index.html')}"> 
+									<a href="#"> <img src="images/animals_icon.png"> </a> 
 								</li>
-								<li data-ng-click="checkSelectedLink('alerts')" ng-class="{'active' : isActive('alerts')}"> 
+								<li data-ng-click="checkSelectedLink('alerts.html')" ng-class="{'active' : isActive('alerts.html')}"> 
 									<a href="alerts.html"> <img src="images/alerts_icon.png"> </a> 
 								</li>
 								<div class="clear"> </div>
@@ -59,7 +59,7 @@
 								<ul ng-controller="ListController">
 								    <li class="scroll_list_title">
 								    	<section> Vaccination Header </section>
-								    	<section> <img src="images/add.png" ng-click="createNoti('Vaccination','vacName','15.6.15')"> </section>
+								    	<section> <img src="images/add.png" ng-click="createNoti('Vaccination','vacName','2015-06-15')"> </section>
 								    	<div class="clear"></div>
 								    </li>
 								    <ng-switch on="anyItemOpen()">

@@ -1,6 +1,6 @@
 var furrycareApp = angular.module("furrycareApp",[]);
 
-furrycareApp.controller('FurryCtrl', function($scope,$http) {
+furrycareApp.controller('FurryCtrl', function($scope,$http,$location) {
 
 	$http.get("http://localhost:3000/get").success(function (data) {
 		console.log(data);
@@ -19,13 +19,12 @@ furrycareApp.controller('FurryCtrl', function($scope,$http) {
     };
 
     $scope.createNoti = function(type,name,dateToExp) {
-        console.log("create notification to vaccination\care.");
+        console.log("create notification to vaccination or to care.");
         console.log(dateToExp);
-
-        // push it to db
-        $http.get('http://localhost:3000/setnewalarm?alarmtype='+type+'&alarmname='+name+'&expdate='+dateToExp).success(function (data){
-            // data need to return the new authorized user... after the changes i think
-            $scope.user = data;
+        // push the notification to db
+        $http.get('http://localhost:3000/setNewAlarm?alarmtype='+type+'&alarmname='+name+'&expdate='+dateToExp)
+                .success(function (data){
+                    $scope.user = data;
         });
 
     };
@@ -34,20 +33,25 @@ furrycareApp.controller('FurryCtrl', function($scope,$http) {
         console.log(type);
         daysleft = (weight * 1000) / dailyUse;
         // NEED TO CALCULATE DATE HERE!!!!
+
         // add daysleft for today date....
         var dateToExp = '1.1.11';
-        // push it to db
-        $http.get('http://localhost:3000/setnewalarm?alarmtype='+type+'&alarmname='+name+'&expdate='+dateToExp).success(function (data){
-            // data need to return the new authorized user... after the changes i think
+        // push the notification to db
+        $http.get('http://localhost:3000/setNewAlarm?alarmtype='+type+'&alarmname='+name+'&expdate='+dateToExp).success(function (data){
             $scope.user = data;
         });
     };
 
 });
 
-furrycareApp.controller('MainNavCtrl',function($scope){
-    //in first run the selected li in main nav be the alerts
-    $scope.selectedMainNavLink = 'animals';
+furrycareApp.controller('MainNavCtrl',function($scope,$location){
+    //in first run the selected li in main nav be the alertshttp://localhost:8080/index.html
+    console.log($location.path());
+    $scope.selectedMainNavLink = $location.path();
+    console.log($scope.selectedMainNavLink);
+    if ($scope.selectedMainNavLink == ""){
+        $scope.selectedMainNavLink ="index.html";
+    }
     // when user click on one of mainNav link he send a 'string' contain the name of li
     $scope.checkSelectedLink = function (nowSelectedLink) {
         $scope.selectedMainNavLink = nowSelectedLink;

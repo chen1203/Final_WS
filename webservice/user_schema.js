@@ -46,7 +46,13 @@ var userSchema = new schema({
         },
       
     ],
-    alarms: []
+    alarms: [ 
+        { 
+            alarmName: {type: String, required: true}, 
+            alarmType: {type: String, required: true},
+            alarmDate: {type: Date, required: true}
+        }
+    ]
 
 	}, {collection: 'furrycare'});
 
