@@ -14,5 +14,10 @@ app.get('/get', function(req,res){
 	res.json(authenticateUser.getData());
 });
 
+app.post('',function(req,res){
+
+// here we need to do some QUERY from db!
+	// send the query result to the application in res.something
+});
 app.listen(3000);
 console.log("service on port 3000");

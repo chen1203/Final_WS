@@ -21,6 +21,7 @@ furrycareApp.controller('FurryCtrl', function($scope,$http) {
     $scope.createVaccNoti = function(dateToExp) {
         console.log("create notification to vaccination.");
         console.log(dateToExp);
+
         // create alarm object
         
         // push it to db
