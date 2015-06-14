@@ -1,7 +1,7 @@
 var furrycareApp = angular.module("furrycareApp",[]);
 
 furrycareApp.controller('FurryCtrl', function($scope,$http) {
-	
+
 	$http.get("http://localhost:3000/get").success(function (data) {
 		console.log(data);
 		$scope.user = data;
@@ -18,15 +18,28 @@ furrycareApp.controller('FurryCtrl', function($scope,$http) {
         return $scope.currAnimal.animalId === nowSelectedAnimalLink;
     };
 
-    $scope.createVaccNoti = function(dateToExp) {
-        console.log("create notification to vaccination.");
+    $scope.createNoti = function(type,name,dateToExp) {
+        console.log("create notification to vaccination\care.");
         console.log(dateToExp);
 
-        // create alarm object
-        
         // push it to db
-        
-        // create notify ?
+        $http.get('http://localhost:3000/setnewalarm?alarmtype='+type+'&alarmname='+name+'&expdate='+dateToExp).success(function (data){
+            // data need to return the new authorized user... after the changes i think
+            $scope.user = data;
+        });
+
+    };
+    $scope.createFoodNoti = function(type,name,weight,dailyUse) {
+        console.log("create notification to food.");
+        console.log(type);
+
+        // NEED TO CALCULATE DATE HERE!!!!
+        var dateToExp = '1.1.11';
+        // push it to db
+        $http.get('http://localhost:3000/setnewalarm?alarmtype='+type+'&alarmname='+name+'&expdate='+dateToExp).success(function (data){
+            // data need to return the new authorized user... after the changes i think
+            $scope.user = data;
+        });
     };
 
 });

@@ -59,7 +59,7 @@
 								<ul ng-controller="ListController">
 								    <li class="scroll_list_title">
 								    	<section> Vaccination Header </section>
-								    	<section> <img src="images/add.png" ng-click="createVaccNoti('15.6.15')"> </section>
+								    	<section> <img src="images/add.png" ng-click="createNoti('Vaccination','vacName','15.6.15')"> </section>
 								    	<div class="clear"></div>
 								    </li>
 								    <ng-switch on="anyItemOpen()">
@@ -85,7 +85,7 @@
 								<ul ng-controller="ListController">
 								    <li class="scroll_list_title">
 								    	<section> Food Header </section>
-								    	<section> <img src="images/add.png"> </section>
+								    	<section> <img src="images/add.png" ng-click="createFoodNoti('Food','foodName','bagWeight','dailyUse')"> </section>
 								    	<div class="clear"></div>
 								    </li>
 								    <ng-switch on="anyItemOpen()">
@@ -111,7 +111,7 @@
 								<ul ng-controller="ListController">
 								    <li class="scroll_list_title">
 								    	<section> Care Header </section>
-								    	<section> <img src="images/add.png"> </section>
+								    	<section> <img src="images/add.png" ng-click="createNoti('Care','CareName','15.6.15')"> </section>
 								    	<div class="clear"></div>
 								    </li>
 								    <ng-switch on="anyItemOpen()">
