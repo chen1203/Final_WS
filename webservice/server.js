@@ -4,9 +4,9 @@ var url = require('url');
 var authenticateUser = require('./furryController');
 
 var Alarm = function(type,name,expdate){
-	type = type;
-	name = name;
-	expdate = expdate;
+	this.type = type;
+	this.name = name;
+	this.expdate = expdate;
 };
 app.use('/', express.static('./public'));
 
