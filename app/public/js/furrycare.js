@@ -2,7 +2,7 @@ var furrycareApp = angular.module("furrycareApp",[]);
 
 furrycareApp.controller('FurryCtrl', function($scope,$http,$location) {
 
-	$http.get("http://localhost:3000/get").success(function (data) {
+	$http.get("https://final-ws-furrycare.herokuapp.com/get").success(function (data) {
 		console.log(data);
 		$scope.user = data;
 		console.log("user name : "+$scope.user.userName);
@@ -22,7 +22,7 @@ furrycareApp.controller('FurryCtrl', function($scope,$http,$location) {
         console.log("create notification to vaccination or to care.");
         console.log(dateToExp);
         // push the notification to db
-        $http.get('http://localhost:3000/setNewAlarm?alarmtype='+type+'&alarmname='+name+'&expdate='+dateToExp)
+        $http.get('https://final-ws-furrycare.herokuapp.com/setNewAlarm?alarmtype='+type+'&alarmname='+name+'&expdate='+dateToExp)
                 .success(function (data){
                     $scope.user = data;
         });
@@ -37,7 +37,7 @@ furrycareApp.controller('FurryCtrl', function($scope,$http,$location) {
         // add daysleft for today date....
         var dateToExp = '1.1.11';
         // push the notification to db
-        $http.get('http://localhost:3000/setNewAlarm?alarmtype='+type+'&alarmname='+name+'&expdate='+dateToExp).success(function (data){
+        $http.get('https://final-ws-furrycare.herokuapp.com/setNewAlarm?alarmtype='+type+'&alarmname='+name+'&expdate='+dateToExp).success(function (data){
             $scope.user = data;
         });
     };
