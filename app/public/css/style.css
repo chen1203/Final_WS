@@ -75,7 +75,7 @@ a{
 		height: 100%;
 	}
 	#animal_nav li {
-		width: 19.75%;
+		width: 17%;
 		height: 100%;
 		float: left;
 		text-align: center;
@@ -87,6 +87,8 @@ a{
 		height: 100%;
 	}
 	#animal_nav img {
+		width: 85%;
+		height: 85%;
 	}
 	#simple_details {
 		width: 100%;
@@ -104,7 +106,7 @@ a{
 	}
 	/* section that holds the edit img  */
 	.simple_detail_edit_img {	
-		width: 19.7%;
+		width: 19.5%;
 		height: 100%;
 		border-right : 1px solid #CBCBCB;
 	}
@@ -192,10 +194,10 @@ a{
 		width: 30%;
 	}
 	.scroll_list_item>section:nth-child(1)>img {
-		width: 72px;
-		height: 72px;
-		padding-left: 8px;
-		padding-top: 12px;
+		width: 75%;
+		height: 75%;
+		padding-left: 10%;
+		padding-top: 27%;
 	}
 	.scroll_list_item>section:nth-child(2) {
 		width: 70%;
