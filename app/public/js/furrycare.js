@@ -1,13 +1,5 @@
 var furrycareApp = angular.module("furrycareApp",[]);
 
-/*,function($locationProvider){
-    $locationProvider.html5Mode({
-//        enabled: true,
-        requireBase: false
-    });
-});
-*/
-
 furrycareApp.controller('FurryCtrl', function($scope,$http,$location) {
 
 	$http.get("https://final-ws-furrycare.herokuapp.com/get").success(function (data) {
@@ -50,38 +42,6 @@ furrycareApp.controller('FurryCtrl', function($scope,$http,$location) {
         });
     };
 });
-/*
-//furrycareApp.controller('MainNavCtrl',function($scope,$location){
-furrycareApp.controller('MainNavCtrl', ['$scope', '$location', function ($scope, $location) {   
-    //in first run the selected li in main nav be the alertshttp://localhost:8080/index.html
-    console.log("loc "+$location.path());
-    $scope.selectedMainNavLink = $location.path();
-    console.log($scope.selectedMainNavLink);
-    if ($scope.selectedMainNavLink == ""){
-        $scope.selectedMainNavLink ="index.html";
-    }
-    // when user click on one of mainNav link he send a 'string' contain the name of li
-    $scope.checkSelectedLink = function (nowSelectedLink) {
-        $scope.selectedMainNavLink = nowSelectedLink;
-    };
-    // then the li class check if is active by the 'string' above
-    $scope.isActive = function (nowSelectedLink) {
-        return $scope.selectedMainNavLink === nowSelectedLink;
-    };
-}]);
-*/
-/*
-furrycareApp.controller('MainNavCtrl', ['$scope', '$location', function ($scope, $location) {
-    $scope.navClass = function (page) {
-        var currentRoute = $location.path().substring(1) || 'index.html';
-        //var loc = $location.path();
-        console.log("page: "+page);
-        console.log("location : "+$location.path());
-        console.log("currentRoute: "+currentRoute);
-        return page === currentRoute ? 'active' : '';
-    };        
-}]);
-*/
 
 furrycareApp.controller('ListController', function ($scope) {
     
