@@ -35,6 +35,27 @@ app.get('/setNewAlarm',function(req,res){
 	res.json(authenticateUser.getUser());
 });
 
+app.get('/setNewAnimal',function(req,res){
+	console.log("set new animal");
+	var url_parts = url.parse(req.url, true);
+	var query = url_parts.query;
+	// same variables for all alarms
+	var animalName = query.animalName;
+	var animalAge = query.animalAge;
+	var animalWeight = query.animalWeight;
+	var animalPic = query.animalPic;
+	console.log("new animal reported: \nAnimal name: "+animalName+"\nanimal age: "+animalAge+"\nanimal pic: "+animalPic+"\n");
+	// Create and push the alarm to db here!!
+	authenticateUser.setAnimal(animalName,animalAge,animalWeight,animalPic);
+	// we return the updated user
+	res.header("Access-Control-Allow-Origin", "*");
+	res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
+	app.set('json spaces',4);
+	res.set("Content-Type", "application/json");
+	res.status(200);
+	res.json(authenticateUser.getUser());
+});
+
 var port = process.env.PORT || 3000;
 app.listen(port);
 console.log("listening on port "+port+"...\n\n");

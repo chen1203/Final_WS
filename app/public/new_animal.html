@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html ng-app="furrycareApp">
+	<head>
+			<meta charset="UTF-8">
+			<meta name="viewport" content="width=device-width">
+			<link rel="stylesheet" href="css/style.css">
+			<title> New Animal </title>
+	</head>
+	<body id="hp">
+		<div id="wrapper">
+				<header>
+					<section id="title_section"> <h1> FURRYCARE </h1> </section>
+					<nav id="main_nav">
+						<ul>
+							<li class='active'> <a href="index.html"> <img src="images/animals_icon.png"> </a> </li>
+							<li> <a href="#"> <img src="images/alerts_icon.png"> </a> </li>
+							<div class="clear"> </div>
+						</ul>
+					</nav>
+				</header>
+				<main ng-controller="NewAnimalCtrl">
+					<h1> NEW ANIMAL </h1>
+					<form ng-submit="addNewAnimal()">
+						<p>
+							<label> name:  </label>
+							<input type="text" name="name" ng-model="animal.animalName">
+						</p>
+						<p>
+							<label> age: </label>
+							<input type="number" name="age" ng-model="animal.animalAge"> 
+						</p>
+						<p>
+							<label> weight: </label>
+							<input type="number" name="weight" ng-model="animal.animalWeight"> 
+						</p>
+
+						<input type="submit" value="Save" />
+					</form>
+				</main>
+		</div>
+		<script src="js/lib/angular/angular.min.js"> </script>
+		<script src="js/furrycare.js"> </script>
+	</body>
+</html>

@@ -20,7 +20,7 @@ exports.getUser = function() {
 
 exports.setAlarm = function(alarmType,alarmName,alarmExpDate) {
 	console.log("on setAlarm");
-	var query = userM.findOne({'email':'tomcohent@gmail.com'});
+	var query = userM.findOne({'email':authenticateUser.email});
 	query.exec(function(err,doc) {
 		if (err) 
 			console.log(err);
@@ -36,7 +36,36 @@ exports.setAlarm = function(alarmType,alarmName,alarmExpDate) {
 				console.log("Number of updated values: "+results);
 			});
 			// update the 'authenticateUser' from mongo
-			var query = userM.findOne({'email':'tomcohent@gmail.com'});
+			var query = userM.findOne({'email':authenticateUser.email});
+			query.exec(function(err, doc) {
+				authenticateUser = doc;
+				console.log("doc: " + authenticateUser);
+			});
+		}
+	});
+};
+
+
+exports.setAnimal = function(animalName,animalAge,animalWeight,animalPic) {
+	console.log("on setAnimal");
+	var query = userM.findOne({'email':authenticateUser.email});
+	query.exec(function(err,doc) {
+		if (err) 
+			console.log(err);
+		else {
+			var animal = {
+				animalName: ''+animalName,
+            	animalAge: animalAge,
+            	animalWeight: animalWeight,
+            	animalPic: ''+animalPic
+			};
+			console.log("new animal : "+animal);
+			var query = doc.update({$push:{animals:animal}});
+			query.exec(function(err, results) {
+				console.log("Number of updated values: "+results);
+			});
+			// update the 'authenticateUser' from mongo
+			var query = userM.findOne({'email':authenticateUser.email});
 			query.exec(function(err, doc) {
 				authenticateUser = doc;
 				console.log("doc: " + authenticateUser);

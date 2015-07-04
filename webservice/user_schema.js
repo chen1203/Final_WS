@@ -7,14 +7,13 @@ var userSchema = new schema({
     pass: {type: String, required: true},
     animals: [
         {
-            animalId: {type: Number, unique: true, required: true},
-            animalName: {type: String, required: true},
+            animalName: {type: String},
             animalAge: {type: Number},
             animalWeight: {type: Number},
             animalPic: {type: String},  //add default
             animalFood: [
                 {
-                    foodName: {type: String, required: true},
+                    foodName: {type: String},
                     foodBrand: {type: String},
                     foodBagWeight: {type: Number},
                     foodBagPrice: {type: Number},
@@ -23,21 +22,21 @@ var userSchema = new schema({
             ],
             animalVaccination: [
                 {
-                    vaccinationDate: {type: Date, required: true, default: Date.now},
-                    vaccinationName: {type: String, required: true},
+                    vaccinationDate: {type: Date, default: Date.now},
+                    vaccinationName: {type: String},
                     vaccinationExpire: {type: Date}
                 }
             ],
             animalCare: [
                 {
-                    careDate: {type: Date, required: true, default: Date.now},
-                    careType:  {type: String, required: true},
+                    careDate: {type: Date, default: Date.now},
+                    careType:  {type: String},
                    	careExpire:  {type: Date}
                 }
             ],
             animalService: [
                 {
-                    serviceType: {type: String, required: true},
+                    serviceType: {type: String},
                     serviceName: {type: String},
                     serviceAddress: {type: String}
                 }

@@ -20,14 +20,17 @@
 				</header>
 				<main>
 					<nav id="animal_nav">
-						<ul ng-repeat="animal in user.animals">
-								 <li data-ng-click="checkSelectedAnimal(animal.animalId-1)" 
-								 					ng-class="{'active' : isActive(animal.animalId)}"> 
-								 	<a href="#"> <img ng-src="images/{{animal.animalPic}}"></a> 
-								 </li>
+						<ul>
+							<li ng-repeat="animal in user.animals" data-ng-click="checkSelectedAnimal(animal._id)" 
+									ng-class="{'active' : isActive(animal._id)}"> 
+								<img ng-src="images/{{animal.animalPic}}">
+							</li>
 						</ul> 
-						<div class="clear"> </div>
 					</nav>
+					<section id="add_animal">
+						<a href="new_animal.html"> <img src="images/add.png"> </a>
+					</section>
+					<div class="clear"> </div>
 					<section id="simple_details">
 						<section>
 							<section class="simple_detail_edit_img"> <img src="images/edit.png"> </section>
@@ -56,7 +59,7 @@
 								<ul ng-controller="ListController">
 								    <li class="scroll_list_title">
 								    	<section> Vaccination Header </section>
-								    	<section> <img src="images/add.png" ng-click="createNoti('Vaccination','vacName','2015-06-15')"> </section>
+								    	<section> <img src="images/add.png" ng-click="createNoti('Vaccination','vacName','2015-07-02')"> </section>
 								    	<div class="clear"></div>
 								    </li>
 								    <ng-switch on="anyItemOpen()">
@@ -82,7 +85,7 @@
 								<ul ng-controller="ListController">
 								    <li class="scroll_list_title">
 								    	<section> Food Header </section>
-								    	<section> <img src="images/add.png" ng-click="createFoodNoti('Food','foodName','bagWeight','dailyUse')"> </section>
+								    	<section> <img src="images/add.png" ng-click="createFoodNoti('111TOM','furina','1','200')"> </section>
 								    	<div class="clear"></div>
 								    </li>
 								    <ng-switch on="anyItemOpen()">
@@ -108,7 +111,7 @@
 								<ul ng-controller="ListController">
 								    <li class="scroll_list_title">
 								    	<section> Care Header </section>
-								    	<section> <img src="images/add.png" ng-click="createNoti('Care','CareName','15.6.15')"> </section>
+								    	<section> <img src="images/add.png" ng-click="createNoti('Care','CareName','10.6.15')"> </section>
 								    	<div class="clear"></div>
 								    </li>
 								    <ng-switch on="anyItemOpen()">
