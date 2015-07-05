@@ -3,10 +3,11 @@
 	<head>
 			<meta charset="UTF-8">
 			<meta name="viewport" content="width=device-width">
+			<script src="js/jquery-1.11.1.min.js"></script>
 			<link rel="stylesheet" href="css/style.css">
 			<title> New Animal </title>
 	</head>
-	<body id="hp">
+	<body ng-controller="FurryCtrl">
 		<div id="wrapper">
 				<header>
 					<section id="title_section"> <h1> FURRYCARE </h1> </section>
@@ -19,23 +20,50 @@
 					</nav>
 				</header>
 				<main ng-controller="NewAnimalCtrl">
-					<h1> NEW ANIMAL </h1>
-					<form ng-submit="addNewAnimal()">
-						<p>
-							<label> name:  </label>
-							<input type="text" name="name" ng-model="animal.animalName">
-						</p>
-						<p>
-							<label> age: </label>
-							<input type="number" name="age" ng-model="animal.animalAge"> 
-						</p>
-						<p>
-							<label> weight: </label>
-							<input type="number" name="weight" ng-model="animal.animalWeight"> 
-						</p>
+					<nav id="animal_nav">
+						<ul>
+							<li ng-repeat="animal in user.animals">
+								<img ng-src="images/{{animal.animalPic}}">
+							</li>
+							<li ng-class="{'active' : true}"> 
+								<img ng-src="images/animal2.png">
+							</li>
+						</ul> 
+					</nav>
+					<h1> newww animal </h1>
+					<section id="new_animal">
+						<section id="new_animal_title"> new </section>
+						<section id="new_animal_pic"> 
+							<section> 
+								<script>
+									$.cloudinary.image("images/animal1.png")
+								</script>
+							</section>
+						</section>
+						<section id="new_animal_details"> details </section>
+						<section id="new_animal_form"> 
+							<form ng-submit="addNewAnimal()">
+								<p>
+									<label> name:  </label>
+									<input type="text" name="name" ng-model="animal.animalName">
+								</p>
+								<p>
+									<label> age: </label>
+									<input type="number" name="age" ng-model="animal.animalAge"> 
+								</p>
+								<p>
+									<label> weight: </label>
+									<input type="number" name="weight" ng-model="animal.animalWeight"> 
+								</p>
+								<p>
+									<label> picture </label>
+									<input type="file" name="picture"> 
+								</p>
 
-						<input type="submit" value="Save" />
-					</form>
+								<input id="new_animal_done" type="submit" value="Save">
+							</form>
+						</section>
+					</section>
 				</main>
 		</div>
 		<script src="js/lib/angular/angular.min.js"> </script>

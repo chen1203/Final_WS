@@ -235,4 +235,39 @@ a{
 	.scroll_list_row_details {
 		padding-top: 15px;
 	}
+	/* new animal page */
+	#new_animal {
+		width: 90%;
+		border: 1px solid #CBCBCB;
+		margin: 0 auto;
+	}
+	#new_animal_title,#new_animal_details,#new_animal_form p {
+		padding-top: 10px;
+		padding-bottom: 10px;
+		border-bottom: 1px solid #CBCBCB;
+		font-family: Open Sans,arial,sans-serif;
+		font-size: 18px;
+	}
+	#new_animal_title{
+		text-align: center;
+	}
+	#new_animal_details {
+		padding-left: 6px;
+	}
+	#new_animal_pic {
+		height: 70px;
+		border-bottom: 1px solid #CBCBCB;
+	}
+	#new_animal_pic>section {
+
+	}
+	#new_animal_form p {
+		padding-left: 6px;
+	}
+	#new_animal_done {
+		display: block;
+		margin: 10px auto;
+	}
+
+
 }

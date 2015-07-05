@@ -46,12 +46,12 @@ exports.setAlarm = function(alarmType,alarmName,alarmExpDate) {
 };
 
 
-exports.setAnimal = function(animalName,animalAge,animalWeight,animalPic) {
+exports.setAnimal = function(animalName,animalAge,animalWeight,animalPic, callback) {
 	console.log("on setAnimal");
 	var query = userM.findOne({'email':authenticateUser.email});
 	query.exec(function(err,doc) {
 		if (err) 
-			console.log(err);
+			console.log("error on set animal :\n "+err);
 		else {
 			var animal = {
 				animalName: ''+animalName,
@@ -59,16 +59,15 @@ exports.setAnimal = function(animalName,animalAge,animalWeight,animalPic) {
             	animalWeight: animalWeight,
             	animalPic: ''+animalPic
 			};
-			console.log("new animal : "+animal);
 			var query = doc.update({$push:{animals:animal}});
-			query.exec(function(err, results) {
+			query.exec(function(err, results) {	
 				console.log("Number of updated values: "+results);
-			});
-			// update the 'authenticateUser' from mongo
-			var query = userM.findOne({'email':authenticateUser.email});
-			query.exec(function(err, doc) {
-				authenticateUser = doc;
-				console.log("doc: " + authenticateUser);
+				// update the 'authenticateUser' from mongo
+				userM.findOne({'email':authenticateUser.email}, function(err, doc2) {
+					authenticateUser = doc2;
+					console.log("doc: " + authenticateUser);
+					callback(err,authenticateUser);
+				});
 			});
 		}
 	});

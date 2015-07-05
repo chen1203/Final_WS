@@ -6,12 +6,22 @@ furrycareApp.controller('FurryCtrl', function($scope,$http,$location) {
 		console.log(data);
 		$scope.user = data;
 		console.log("user name : "+$scope.user.userName);
-        $scope.currAnimal = data.animals[0];
+        
+        $scope.currAnimal = $scope.user.animals[0];        
+
+    /*    if ( typeof $scope.user.animals !== 'undefined') {
+            var len = $scope.user.animals.length;
+            if (len >= 1) {
+                $scope.currAnimal = $scope.user.animals[len-1];
+                console.log("last animal: "+$scope.user.animals[len-1].animalName);
+                console.log("curr: "+$scope.currAnimal.animalName);
+            }else 
+                $scope.currAnimal = $scope.user.animals[0];      
+        }*/   
 	});
 
     $scope.checkSelectedAnimal = function(id) {
-        console.log("id= "+id);
-        //$scope.currAnimal = $scope.user.animals[id]; 
+        console.log("id= "+id); 
         angular.forEach($scope.user.animals, function(animal) {
             console.log(animal._id);
             if (animal._id == id) {
@@ -19,7 +29,7 @@ furrycareApp.controller('FurryCtrl', function($scope,$http,$location) {
             } 
         });
     };
-    $scope.isActive = function (nowSelectedAnimalLink) {
+    $scope.isActive = function(nowSelectedAnimalLink) {
         return $scope.currAnimal._id === nowSelectedAnimalLink;
     };
 
@@ -46,6 +56,50 @@ furrycareApp.controller('FurryCtrl', function($scope,$http,$location) {
             $scope.user = data;
         });
     };
+
+});
+
+furrycareApp.controller('NewAnimalCtrl', function ($scope,$http) {
+     $scope.animal = {
+                animalName: '',
+                animalAge: '',
+                animalWeight: '',
+                animalPic: 'animal1.png'
+            };
+    $scope.addNewAnimal = function() {
+        console.log("name: "+ $scope.animal.animalName);
+        console.log("age: "+ $scope.animal.animalAge);
+        console.log("weight: "+ $scope.animal.animalWeight);
+        console.log("pic: "+ $scope.animal.animalPic);
+
+        $http.get('http://localhost:3000/setNewAnimal?animalName='+$scope.animal.animalName+'&animalAge='+$scope.animal.animalAge
+            +'&animalWeight='+$scope.animal.animalWeight+'&animalPic='+$scope.animal.animalPic)
+            .success(function (data){
+                console.log("set new animal successfully...");
+                console.log(data);  
+                window.location.href = "index.html"; 
+                console.log("after redirect...");
+                //$scope.user = data; /* make trubles */
+                
+                //$scope.checkSelectedAnimal($scope.user.animals[1]._id);
+                //$scope.newAnimal = true;
+                //$scope.currAnimal = $scope.user.animals[$scope.user.animals.length-1];
+                //console.log("curr animal after added : "+$scope.currAnimal.animalName);
+              /*  var len = $scope.user.animals.length;
+                console.log("LENGTH : "+len);
+                console.log($scope.currAnimal);
+                if (len >= 1) {
+                    $scope.currAnimal = $scope.user.animals[len-1];
+                    console.log("last animal: "+$scope.user.animals[len-1].animalName);
+                    console.log("curr: "+$scope.currAnimal.animalName);
+                }
+                else 
+                    $scope.currAnimal = $scope.user.animals[0];
+                */
+                   
+        });
+       
+    };
 });
 
 furrycareApp.controller('ListController', function ($scope) {
@@ -69,33 +123,10 @@ furrycareApp.controller('ListController', function ($scope) {
     $scope.close = function() {
         $scope.opened = undefined;
     };
-});
+});    
 
 furrycareApp.controller('ItemController', function ($scope) {
 
 });
 
-
-furrycareApp.controller('NewAnimalCtrl', function ($scope,$http) {
-
-    $scope.animal = {
-                animalName: '',
-                animalAge: '',
-                animalWeight: '',
-                animalPic: 'animal1.png'
-            };
-    $scope.addNewAnimal = function() {
-        console.log("name: "+ $scope.animal.animalName);
-        console.log("age: "+ $scope.animal.animalAge);
-        console.log("weight: "+ $scope.animal.animalWeight);
-        console.log("pic: "+ $scope.animal.animalPic);
-
-        $http.get('http://localhost:3000/setNewAnimal?animalName='+$scope.animal.animalName+'&animalAge='+$scope.animal.animalAge
-            +'&animalWeight='+$scope.animal.animalWeight+'&animalPic='+$scope.animal.animalPic).success(function (data){
-            $scope.user = data;
-        });
-        window.location.href = "index.html";    
-    };
-
-});
 
