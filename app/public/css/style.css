@@ -90,8 +90,10 @@ a{
 		border-right: 1px solid #CBCBCB;
 	}
 	#animal_nav img {
-		width: 90%;
-		height: 90%;
+		/*width: 90%;
+		height: 90%;*/
+		width: 42px;
+		height: 42px;
 	}
 	#add_animal {
 		width: 19%;
@@ -259,41 +261,7 @@ a{
 	.scroll_list_row_details {
 		padding-top: 15px;
 	}
-	/* new animal page */
-	#new_animal {
-		width: 90%;
-		border: 1px solid #CBCBCB;
-		margin: 0 auto;
-	}
-	#new_animal_title,#new_animal_details,#new_animal_form p {
-		padding-top: 10px;
-		padding-bottom: 10px;
-		border-bottom: 1px solid #CBCBCB;
-		font-family: Open Sans,arial,sans-serif;
-		font-size: 18px;
-	}
-	#new_animal_title{
-		text-align: center;
-	}
-	#new_animal_details {
-		padding-left: 6px;
-	}
-	#new_animal_pic {
-		height: 70px;
-		border-bottom: 1px solid #CBCBCB;
-	}
-	#new_animal_pic>section {
-
-	}
-	#new_animal_form p {
-		padding-left: 6px;
-	}
-	#new_animal_done {
-		display: block;
-		margin: 10px auto;
-	}
-
-
+	
 	/* LOGIN PAGE */
 	.login_body {
 		background-color: #f05d58;
@@ -338,4 +306,77 @@ a{
 	#spacer{
 		height: 25px;
 	}
+	/* NEW_ANIMAL PAGE */
+	#new_animal_form input {
+		outline: 0;
+		border: 0px solid;
+		font-family: Open Sans,arial,sans-serif;
+		font-size: 16px;	
+	}
+	.circlephoto {
+	/*  width:50px;
+	  height:50px;*/
+	  border-radius:99px;
+	  -moz-border-radius:99px;
+	  -webkit-border-radius:99px;
+	  background:black;
+	  color:#fff;
+	  border:3px #fff solid;
+	  background-color: #e7676d;
+	  background-image: -webkit-gradient(linear, left top, left bottom, from(#e7676d), to(#b7070a)); /* Saf4+, Chrome */
+	  background-image: -webkit-linear-gradient(top, #e7676d, #b7070a); /* Chrome 10+, Saf5.1+, iOS 5+ */
+	  background-image: -moz-linear-gradient(top, #e7676d, #b7070a); /* FF3.6 */
+	  background-image: -ms-linear-gradient(top, #e7676d, #b7070a); /* IE10 */
+	  background-image: -o-linear-gradient(top, #e7676d, #b7070a); /* Opera 11.10+ */
+	  background-image: linear-gradient(top, #e7676d, #b7070a);
+	  filter: progid:DXImageTransform.Microsoft.gradient(startColorStr='#e7676d', EndColorStr='#b7070a'); 
+	  display:block;
+	  padding:2px 2px 2px 2px ;
+	  margin:3px auto;
+	  font-family:arial;
+	  font-weight:bold;
+   }
+   #profileImage {
+   	  width:50px;
+	  height:50px;
+   }
+	#new_animal {
+		width: 90%;
+		border: 1px solid #CBCBCB;
+		margin: 0 auto;
+	}
+	#new_animal_title,#new_animal_details,#new_animal_form p {
+		padding-top: 10px;
+		padding-bottom: 10px;
+		border-bottom: 1px solid #CBCBCB;
+		font-family: Open Sans,arial,sans-serif;
+		font-size: 18px;
+	}
+	#new_animal_title{
+		text-align: center;
+	}
+	#new_animal_details {
+		padding-left: 6px;
+		border-bottom: 1px solid #000000; 
+	}
+	#new_animal_pic {
+		height: 70px;
+		border-bottom: 1px solid #000000; 
+	}
+	#new_animal_form p {
+		padding-left: 6px;
+	}
+	#new_animal_done {
+		display: block;
+		margin: 10px auto;
+	}
+	#def_circle {
+		margin: 3px auto;
+		border-radius:99px;
+		background-color: #e7676d;
+		width: 40px;
+		height: 40px;
+	}
+
+
 }

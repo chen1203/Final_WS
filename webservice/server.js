@@ -78,7 +78,6 @@ app.get('/setNewAnimal',function(req,res){
 			res.json(data);
 		}
 	});
-
 });
 
 app.get('/setAnimalField',function(req,res){
@@ -106,18 +105,13 @@ app.get('/setAnimalField',function(req,res){
 	});
 });
 
-
-/*
-app.get('/setAnimalName',function(req,res){
-	console.log("set animal name");
+app.get('/deleteAnimal',function(req,res){
+	console.log("delete animal");
 	var url_parts = url.parse(req.url, true);
 	var query = url_parts.query;
-	// same variables for all alarms
 	var animalId = query.animalId;
-	var animalNewName = query.animalNewName;
-	console.log("update animal name to: "+animalNewName+"\n");
-	// update animal name to db here!!
-	authenticateUser.setAnimalName(animalId,animalNewName, function(err,data) {
+	// delete animal from db 
+	authenticateUser.deleteAnimal(animalId, function(err,data) {
 		if (err)
 			 res.send(500, "something went wrong: "+err);
 		else {
@@ -130,7 +124,8 @@ app.get('/setAnimalName',function(req,res){
 			res.json(data);
 		}
 	});
-});*/
+});
+
 //var port = process.env.PORT || 3000;
 var port = 3000;
 app.listen(port);

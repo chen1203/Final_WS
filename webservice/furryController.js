@@ -121,10 +121,8 @@ exports.setAnimalField = function(field,animalId,animalNewVal,callback) {
 	});
 };
 
+exports.deleteAnimal = function(animalId,callback) {
 
-/*
-exports.setAnimalName = function(animalId,animalNewName,callback) {
-	console.log("on setAnimalName");
 	var query = userM.findOne({'email':authenticateUser.email});
 	query.exec(function(err,doc) {
 		if (err) 
@@ -132,15 +130,12 @@ exports.setAnimalName = function(animalId,animalNewName,callback) {
 		else {
 			console.log("user id : "+doc._id);
 			console.log("animal id: "+animalId);
-			console.log("animal new name: "+animalNewName);
+			
+			var deleteQuery = userM.findOneAndUpdate(
+				{ "_id" : doc._id},
+				{$pull: {"animals": { _id : animalId }}});
 
-			var query = userM.findOneAndUpdate(
-				{ "_id" : doc._id, "animals._id" : animalId},
-				{ "$set" : {
-						"animals.$.animalName" : animalNewName 
-					}
-				});
-			query.exec(function(err, results) {	
+			deleteQuery.exec(function(err, results) {	
 				console.log("updated values: "+results);
 				// update the 'authenticateUser' from mongo
 				userM.findOne({'email':authenticateUser.email}, function(err, doc2) {
@@ -152,5 +147,3 @@ exports.setAnimalName = function(animalId,animalNewName,callback) {
 		}
 	});
 };
-
-*/

@@ -3,6 +3,12 @@ var furrycareApp = angular.module("furrycareApp",['ngCookies']);
 furrycareApp.controller('LoginCtrl',['$scope','$http','$cookies','$cookieStore','$window',
                                                         function ($scope,$http,$cookies,$cookieStore,$window) {       
 
+    // checking of the user is allready connected (has a cookie)
+    if (typeof $cookies.userMail !== 'undefined')
+        window.location.href = "index.html"; 
+    else
+        console.log("cookie: "+$cookies.userMail);
+
     $scope.tries = 0;
     $scope.login = function() {
         
@@ -61,15 +67,18 @@ furrycareApp.controller('FurryCtrl', ['$scope','$http','$cookies','$cookieStore'
         console.log(data);
         $scope.user = data;
         console.log("user name : "+$scope.user.userName);
-        //if ( typeof $scope.user.animals !== 'undefined') {
+        $scope.updateCurrentAnimal();             
+	});
+
+    $scope.updateCurrentAnimal = function() {
         var len = $scope.user.animals.length;    
         if (len > 0) {
-            console.log(len);
+            console.log("number of animals in array : "+len);
             $scope.currAnimal = $scope.user.animals[len-1];
             console.log("curr: "+$scope.currAnimal.animalName);
         } else
-               $scope.currAnimal = $scope.user.animals[0];               
-	});
+               $scope.currAnimal = $scope.user.animals[0]; 
+    }
 
     $scope.checkSelectedAnimal = function(id) {
         //console.log("id= "+id); 
@@ -162,6 +171,18 @@ furrycareApp.controller('FurryCtrl', ['$scope','$http','$cookies','$cookieStore'
                 console.log("no need to update in db.");
             return;
         }
+    }   
+
+    $scope.deleteAnimal = function() {
+        console.log("delete animal name :"+$scope.currAnimal.animalName);
+        $http.get('http://localhost:3000/deleteAnimal?animalId='+$scope.currAnimal._id)
+            .success(function (data){
+                $scope.user = data;
+                console.log(data);
+                console.log($scope.currAnimal.animalName);
+                // update new current animal because last current animal was deleted.
+                $scope.updateCurrentAnimal();
+        });
     }
 
     $scope.createNoti = function(type,name,dateToExp) {

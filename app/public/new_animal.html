@@ -26,41 +26,35 @@
 								<img ng-src="images/{{animal.animalPic}}">
 							</li>
 							<li ng-class="{'active' : true}"> 
-								<img ng-src="images/animal2.png">
+								<section id="def_circle"> </section>
 							</li>
 						</ul> 
 					</nav>
 					<h1> newww animal </h1>
 					<section id="new_animal">
-						<section id="new_animal_title"> new </section>
+						<section id="new_animal_title"> New </section>
 						<section id="new_animal_pic"> 
-							<section> 
-								<!--<script>
-									$.cloudinary.image("images/animal1.png")
-								</script> -->
-							</section>
+								<input type='file' id="imgInp" multiple accept='image/*' style="display:none">
+    							<img id="profileImage" ng-src="#" alt="profileImage" class="circlephoto" 
+    							style="cursor:pointer">
 						</section>
-						<section id="new_animal_details"> details </section>
+						<section id="new_animal_details"> Details </section>
 						<section id="new_animal_form"> 
 							<form ng-submit="addNewAnimal()">
 								<p>
-									<label> name:  </label>
+									<label> Name:  </label>
 									<input type="text" name="name" ng-model="animal.animalName">
 								</p>
 								<p>
-									<label> age: </label>
+									<label> Age: </label>
 									<input type="number" name="age" ng-model="animal.animalAge"> 
 								</p>
 								<p>
-									<label> weight: </label>
+									<label> Weight: </label>
 									<input type="number" name="weight" ng-model="animal.animalWeight"> 
 								</p>
-								<p>
-									<label> picture </label>
-									<input type="file" name="picture"> 
-								</p>
 
-								<input id="new_animal_done" type="submit" value="Save">
+								<input id="new_animal_done" type="submit" value="Done">
 							</form>
 						</section>
 					</section>
@@ -68,6 +62,8 @@
 		</div>
 		<script src="js/lib/angular/angular.min.js"> </script>
 		<script src="js/lib/angular/angular-cookies.js"> </script>
+		<script src="js/jquery-1.11.1.min.js"> </script>
+		<script src="js/furryfunctions.js"> </script>
 		<script src="js/furrycare.js"> </script>
 	</body>
 </html>
