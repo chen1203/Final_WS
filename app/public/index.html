@@ -32,26 +32,41 @@
 					</section>
 					<div class="clear"> </div>
 					<section id="simple_details">
-						<section>
+						<section> <!-- name field -->
 							<section class="simple_detail_edit_img" ng-click="editClicked('animalName')"
-									 ng-class="{'edit_mode' : editname==true}"> </section>
+									 ng-class="{'edit_mode' : editname}"> 
+							</section>
 							<section class="simple_detail_desc"> 
-								<section> <input ng-model="currAnimal.animalName"> </section> 
-								<section ng-if="isInEditNameMode()" ng-click="doneClicked()"> DONE </section>
+								<section> <input ng-readonly="editname==false" ng-model="currAnimal.animalName"> 
+								</section> 
+								<section ng-if="isInEditMode('animalName')" ng-click="doneClicked('animalName')"> 
+									DONE </section>
 							</section>
 							<div class="clear"></div>
 						</section>
-						<section>
-							<section class="simple_detail_edit_img">  </section>
+						<section> <!-- age field -->
+							<section class="simple_detail_edit_img" ng-click="editClicked('animalAge')"
+									 ng-class="{'edit_mode' : editage}">  
+							</section>
 							<section class="simple_detail_desc"> 
-								<section> Age: {{currAnimal.animalAge}} years </section> 
+								<section> Age :
+									<input ng-readonly="editage==false" ng-model="currAnimal.animalAge">
+								</section> 
+								<section ng-if="isInEditMode('animalAge')" ng-click="doneClicked('animalAge')"> 
+									DONE </section>
 							</section>
 							<div class="clear"></div>
 						</section>
-						<section>
-							<section class="simple_detail_edit_img">  </section>
+						<section> <!-- weight field -->
+							<section class="simple_detail_edit_img" ng-click="editClicked('animalWeight')"
+									 ng-class="{'edit_mode' : editweight}">   
+							</section>
 							<section class="simple_detail_desc"> 
-								<section> Weight: {{currAnimal.animalWeight}} kg </section> 
+								<section> Weight :
+									<input ng-readonly="editweight==false" ng-model="currAnimal.animalWeight">
+								</section> 
+								<section ng-if="isInEditMode('animalWeight')" ng-click="doneClicked('animalWeight')"> 	
+									DONE </section>
 							</section>
 							<div class="clear"></div>
 						</section>			
@@ -145,6 +160,7 @@
 				</main>
 		</div>
 		<script src="js/lib/angular/angular.min.js"> </script>
+		<script src="js/lib/angular/angular-cookies.js"> </script>
 		<script src="js/furrycare.js"> </script>
 	</body>
 </html>

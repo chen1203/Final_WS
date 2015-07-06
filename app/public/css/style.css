@@ -158,7 +158,7 @@ a{
 		font-size: 16px;
 	}
 	.simple_detail_desc>section:nth-child(2) {
-		color: red;
+		color: #f15d59;
 		right: 8%;
 	}
 	#complex_details{

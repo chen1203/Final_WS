@@ -81,6 +81,56 @@ app.get('/setNewAnimal',function(req,res){
 
 });
 
+app.get('/setAnimalField',function(req,res){
+	console.log("set animal field");
+	var url_parts = url.parse(req.url, true);
+	var query = url_parts.query;
+	var field = query.field;
+	var animalId = query.animalId;
+	var animalNewVal = query.animalNewVal;
+
+	console.log("update animal "+field+" to: "+animalNewVal+"\n");
+	// update animal field to db here!!
+	authenticateUser.setAnimalField(field,animalId,animalNewVal, function(err,data) {
+		if (err)
+			 res.send(500, "something went wrong: "+err);
+		else {
+			// we return the updated user
+			res.header("Access-Control-Allow-Origin", "*");
+			res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
+			app.set('json spaces',4);
+			res.set("Content-Type", "application/json");
+			res.status(200)
+			res.json(data);
+		}
+	});
+});
+
+
+/*
+app.get('/setAnimalName',function(req,res){
+	console.log("set animal name");
+	var url_parts = url.parse(req.url, true);
+	var query = url_parts.query;
+	// same variables for all alarms
+	var animalId = query.animalId;
+	var animalNewName = query.animalNewName;
+	console.log("update animal name to: "+animalNewName+"\n");
+	// update animal name to db here!!
+	authenticateUser.setAnimalName(animalId,animalNewName, function(err,data) {
+		if (err)
+			 res.send(500, "something went wrong: "+err);
+		else {
+			// we return the updated user
+			res.header("Access-Control-Allow-Origin", "*");
+			res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
+			app.set('json spaces',4);
+			res.set("Content-Type", "application/json");
+			res.status(200)
+			res.json(data);
+		}
+	});
+});*/
 //var port = process.env.PORT || 3000;
 var port = 3000;
 app.listen(port);

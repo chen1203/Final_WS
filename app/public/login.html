@@ -7,25 +7,28 @@
 			<title> Login </title>
 	</head>
 	<body>
-		<div id="wrapper" ng-controller="LoginCtrl">
+		<div id="wrapper" class="login_body" ng-controller="LoginCtrl">
 				<header>
 				</header>
 				<main>
-					<h1> login.. </h1>
-					<form ng-submit="login()">
+					<section id="loginIcon"><img src="images/loginIcon.png" ></section>
+					<form ng-submit="login()" id="loginForm">
 						<p>
-							<label> mail:  </label>
-							<input type="mail" name="mail" ng-model="user.email">
+							<input type="mail" name="mail" ng-model="user.email" placeholder="Email" class="textInput">
 						</p>
 						<p>
-							<label> password: </label>
-							<input type="password" name="pass" ng-model="user.pass"> 
+							<input type="password" name="pass" ng-model="user.pass" placeholder="Password" class="textInput">
 						</p>
-						<input type="submit" value="login">
+						<section id="loginSectionButton"><p>Login</p></section>
+						<input type="submit" id="loginButton" value="login">
 					</form>
+					<section id="spacer"></section>
 				</main>
 		</div>
 		<script src="js/lib/angular/angular.min.js"> </script>
+		<script src="js/lib/angular/angular-cookies.js"> </script>
+		<script src="js/jquery-1.11.1.min.js"> </script>
+		<script src="js/login.js"> </script>
 		<script src="js/furrycare.js"> </script>
 	</body>
 </html>

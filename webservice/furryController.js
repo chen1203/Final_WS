@@ -82,4 +82,75 @@ exports.setAnimal = function(animalName,animalAge,animalWeight,animalPic, callba
 	});
 };
 
+exports.setAnimalField = function(field,animalId,animalNewVal,callback) {
+	console.log("on setAnimal: "+field);
+	var query = userM.findOne({'email':authenticateUser.email});
+	query.exec(function(err,doc) {
+		if (err) 
+			console.log("error on set animal :\n "+err);
+		else {
+			console.log("user id : "+doc._id);
+			console.log("animal id: "+animalId);
+			console.log("animal new value: "+animalNewVal);
+			if (field === "animalName")
+				var updateQuery = userM.findOneAndUpdate(
+					{ "_id" : doc._id, "animals._id" : animalId},
+					{ "$set" : {"animals.$.animalName" : animalNewVal }
+					});
+			else if (field === "animalAge")
+				var updateQuery = userM.findOneAndUpdate(
+					{ "_id" : doc._id, "animals._id" : animalId},
+					{ "$set" : {"animals.$.animalAge" : animalNewVal }
+					});
+			else
+				var updateQuery = userM.findOneAndUpdate(
+					{ "_id" : doc._id, "animals._id" : animalId},
+					{ "$set" : {"animals.$.animalWeight" : animalNewVal }
+					});
 
+			updateQuery.exec(function(err, results) {	
+				console.log("updated values: "+results);
+				// update the 'authenticateUser' from mongo
+				userM.findOne({'email':authenticateUser.email}, function(err, doc2) {
+					authenticateUser = doc2;
+					console.log("doc: " + authenticateUser);
+					callback(err,authenticateUser);
+				});
+			});
+		}
+	});
+};
+
+
+/*
+exports.setAnimalName = function(animalId,animalNewName,callback) {
+	console.log("on setAnimalName");
+	var query = userM.findOne({'email':authenticateUser.email});
+	query.exec(function(err,doc) {
+		if (err) 
+			console.log("error on set animal :\n "+err);
+		else {
+			console.log("user id : "+doc._id);
+			console.log("animal id: "+animalId);
+			console.log("animal new name: "+animalNewName);
+
+			var query = userM.findOneAndUpdate(
+				{ "_id" : doc._id, "animals._id" : animalId},
+				{ "$set" : {
+						"animals.$.animalName" : animalNewName 
+					}
+				});
+			query.exec(function(err, results) {	
+				console.log("updated values: "+results);
+				// update the 'authenticateUser' from mongo
+				userM.findOne({'email':authenticateUser.email}, function(err, doc2) {
+					authenticateUser = doc2;
+					console.log("doc: " + authenticateUser);
+					callback(err,authenticateUser);
+				});
+			});
+		}
+	});
+};
+
+*/
