@@ -16,6 +16,12 @@ a{
 	text-decoration: none;
 	color:black;
 }
+
+@font-face {
+	font-family: gil;
+	src: url(../fonts/gillsans-light.ttf);
+}
+
 .clear {
 	clear: both;
 }
@@ -288,4 +294,24 @@ a{
 	}
 
 
+	/* LOGIN PAGE */
+	.login_body {
+		background-color: #f05d58;
+	}
+	#loginIcon{
+		width: 100%;
+		padding: 25% 0 25% 0;
+		text-align: center;
+	}
+	#loginForm{
+		text-align: center;
+	}
+	.textInput{
+		width: 75%;
+		height: 78px;
+		padding-left: 10%;
+		margin-bottom: 26px;
+		font-size: 24px;
+		font-family:gil,Verdana, sans-serif;
+	}
 }
