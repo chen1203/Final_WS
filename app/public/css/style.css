@@ -314,4 +314,10 @@ a{
 		font-size: 24px;
 		font-family:gil,Verdana, sans-serif;
 	}
+	#loginButton{
+		display:none;
+	}
+	#loginSectionButton{
+		cursor:pointer;
+	}
 }
