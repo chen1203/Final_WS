@@ -33,21 +33,23 @@
 					<div class="clear"> </div>
 					<section id="simple_details">
 						<section>
-							<section class="simple_detail_edit_img"> <img src="images/edit.png"> </section>
+							<section class="simple_detail_edit_img" ng-click="editClicked('animalName')"
+									 ng-class="{'edit_mode' : editname==true}"> </section>
 							<section class="simple_detail_desc"> 
-								<section> {{currAnimal.animalName}} </section> 
+								<section> <input ng-model="currAnimal.animalName"> </section> 
+								<section ng-if="isInEditNameMode()" ng-click="doneClicked()"> DONE </section>
 							</section>
 							<div class="clear"></div>
 						</section>
 						<section>
-							<section class="simple_detail_edit_img"> <img src="images/edit.png"> </section>
+							<section class="simple_detail_edit_img">  </section>
 							<section class="simple_detail_desc"> 
 								<section> Age: {{currAnimal.animalAge}} years </section> 
 							</section>
 							<div class="clear"></div>
 						</section>
 						<section>
-							<section class="simple_detail_edit_img"> <img src="images/edit.png"> </section>
+							<section class="simple_detail_edit_img">  </section>
 							<section class="simple_detail_desc"> 
 								<section> Weight: {{currAnimal.animalWeight}} kg </section> 
 							</section>
@@ -59,7 +61,10 @@
 								<ul ng-controller="ListController">
 								    <li class="scroll_list_title">
 								    	<section> Vaccination Header </section>
-								    	<section> <img src="images/add.png" ng-click="createNoti('Vaccination','vacName','2015-07-02')"> </section>
+								    	<!--<section> 
+								    		<img src="images/add.png" 
+								    		ng-click="createNoti('Vaccination','vacName','2015-07-02')"> 
+								    	</section> -->
 								    	<div class="clear"></div>
 								    </li>
 								    <ng-switch on="anyItemOpen()">

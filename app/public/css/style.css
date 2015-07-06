@@ -125,14 +125,20 @@ a{
 		width: 19.5%;
 		height: 100%;
 		border-right : 1px solid #CBCBCB;
+		background: #ffffff url("../images/edit.png") no-repeat center;
+		background-size: 70% 70%;
 	}
-	.simple_detail_edit_img>img {
+	/*.simple_detail_edit_img>img {
 		display: block;
 		width: 30px;
 		height: 30px;
 		position: absolute;
 		left: 30%;
 		top: 15%;
+	}*/
+	.edit_mode {
+		background: #f15d59 url("../images/editclicked.png") no-repeat center;
+		background-size: 70% 70%;
 	}
 	.simple_detail_desc {	
 		width: 80%;
@@ -140,8 +146,20 @@ a{
 	}
 	.simple_detail_desc>section {
 		position: absolute;
-		left: 8%;
 		top: 28%;
+	}
+	.simple_detail_desc>section:nth-child(1) {
+		left: 8%;
+	}
+	.simple_detail_desc>section>input,.simple_detail_desc>section>input:focus {
+		outline: 0;
+		border: 0px solid;
+		font-family: Open Sans,arial,sans-serif;
+		font-size: 16px;
+	}
+	.simple_detail_desc>section:nth-child(2) {
+		color: red;
+		right: 8%;
 	}
 	#complex_details{
 		width: 100%;

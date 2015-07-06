@@ -5,14 +5,28 @@ var authenticateUser = require('./furryController');
 
 app.use('/', express.static('./public'));
 
-app.get('/get', function(req,res){
-	console.log("out docs: " + authenticateUser.getUser());
-	res.header("Access-Control-Allow-Origin", "*");
-	res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
-	app.set('json spaces',4);
-	res.set("Content-Type", "application/json");
-	res.status(200);
-	res.json(authenticateUser.getUser());
+app.get('/getUser',function(req,res){
+	console.log("get user web service");
+	var url_parts = url.parse(req.url, true);
+	var query = url_parts.query;
+	var userMail = query.userMail;
+	console.log("user mail: "+userMail+"\n");
+	// 
+	authenticateUser.getUser(userMail, function(err,data) {
+		console.log("error on getUser from server... " + err);
+		if (err)
+			 res.send(500, "something went wrong: "+err);
+		else {
+			console.log("error is null.");
+			// we return the required user
+			res.header("Access-Control-Allow-Origin", "*");
+			res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
+			app.set('json spaces',4);
+			res.set("Content-Type", "application/json");
+			res.status(200)
+			res.json(data);
+		}
+	});
 });
 
 app.get('/setNewAlarm',function(req,res){
@@ -25,14 +39,19 @@ app.get('/setNewAlarm',function(req,res){
 	var alarmExpDate= query.expdate;
 	console.log("new alarm reported: \nAlarm Type: "+query.alarmtype+"\nAlarm Name: "+query.alarmname+"\nExp. Date: "+query.expdate);
 	// Create and push the alarm to db here!!
-	authenticateUser.setAlarm(alarmType,alarmName,alarmExpDate);
-	// we return the updated user
-	res.header("Access-Control-Allow-Origin", "*");
-	res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
-	app.set('json spaces',4);
-	res.set("Content-Type", "application/json");
-	res.status(200);
-	res.json(authenticateUser.getUser());
+	authenticateUser.setAlarm(alarmType,alarmName,alarmExpDate, function(err,data) {
+		if (err)
+			res.send(500, "something went wrong: "+err);
+		else {
+			// we return the updated user
+			res.header("Access-Control-Allow-Origin", "*");
+			res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
+			app.set('json spaces',4);
+			res.set("Content-Type", "application/json");
+			res.status(200);
+			res.json(data);
+		}
+	});
 });
 
 app.get('/setNewAnimal',function(req,res){
