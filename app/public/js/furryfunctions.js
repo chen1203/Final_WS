@@ -1,16 +1,18 @@
 /********** LOGIN **********/
 
 $("#loginButton").change(function(){
+    console.log("jsahdjfs change");
     readURL(this);
 });
 
 $("#loginSectionButton").click(function () {
+    console.log("dsjfhsjdfh");
     $("#loginButton").trigger('click');
 });
 
 $( document ).ready(function() {
   // Handler for .ready() called.
-  console.log("on ready");
+//  console.log("on ready");
 });
 
 /********** NEW ANIMAL **********/

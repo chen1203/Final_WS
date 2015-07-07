@@ -1,17 +1,59 @@
-var furrycareApp = angular.module("furrycareApp",['ngCookies']);
+var furrycareApp = angular.module("furrycareApp",['ngCookies','ngRoute']);
+furrycareApp.config(function($routeProvider){
+      $routeProvider
+          .when('/',{
+                templateUrl: 'pages/login.html',
+                controller: 'loginCtrl'
+          })
+          .when('/notification',{
+                templateUrl: 'pages/notification.html',
+                controller: 'notificationCtrl'
+          })
+          .when('/home',{
+                templateUrl: 'pages/home.html',
+                controller: 'FurryCtrl'
+          })
+          .when('/new_animal',{
+                templateUrl: 'pages/new_animal.html',
+                controller: 'animalCtrl'
+          });
+         /* .otherwise({
+                redirectTo : 'pages/home'
+          });*/          
+});
 
-furrycareApp.controller('LoginCtrl',['$scope','$http','$cookies','$cookieStore','$window',
-                                                        function ($scope,$http,$cookies,$cookieStore,$window) {       
+furrycareApp.service('sharedProperties', function () {
+        //var property = 'First';
+        var property = 'First';
+
+        return {
+            getProperty: function () {
+                return property;
+            },
+            setProperty: function(value) {
+                property = value;
+            }
+        };
+    });
+
+furrycareApp.controller('loginCtrl',['$scope','$rootScope','$http','$cookies','$cookieStore','$window', 'sharedProperties',
+                                                       function ($scope,$rootScope,$http,$cookies,$cookieStore,$window,sharedProperties) {       
+                            
+                                                       
+                $rootScope.$broadcast('yes','wooowwwwww');
+/*    $scope.editname = false;
+    $scope.editage = false;
+    $scope.editweight = false;                       */
 
     // checking of the user is allready connected (has a cookie)
     if (typeof $cookies.userMail !== 'undefined')
-        window.location.href = "index.html"; 
+        window.location.href = "index.html#/home"; 
     else
         console.log("cookie: "+$cookies.userMail);
 
     $scope.tries = 0;
-    $scope.login = function() {
-        
+
+    $scope.login = function() {    
         console.log("mail: "+ $scope.user.email);
         console.log("pass: "+ $scope.user.pass);
         console.log("try number: "+$scope.tries);       
@@ -23,7 +65,7 @@ furrycareApp.controller('LoginCtrl',['$scope','$http','$cookies','$cookieStore',
                 console.log(data);
                 
                 if (data == null) {
-                    alert("There is no such mail in the system. move to sign in.");
+                    alert("There is no such email in the system. move to sign in.");
                     // delete history
                     window.location.href = "error.html"; // sign in ?
                 } else {
@@ -35,7 +77,7 @@ furrycareApp.controller('LoginCtrl',['$scope','$http','$cookies','$cookieStore',
                          //$cookies.put('userMail', data.email);                     
                          $cookies.userMail = data.email;
                          console.log("FROM LOGIN- COOKIE : "+$cookies.userMail);
-                         window.location.href = "index.html"; 
+                         window.location.href = "index.html#/home"; 
                     } else {
                          alert("incorrect password.");
                          //clear input
@@ -53,32 +95,30 @@ furrycareApp.controller('LoginCtrl',['$scope','$http','$cookies','$cookieStore',
     };
 }]);
 
-furrycareApp.controller('FurryCtrl', ['$scope','$http','$cookies','$cookieStore','$window','$location',
-                                                    function ($scope,$http,$cookies,$cookieStore,$window,$location) {   
+furrycareApp.controller('FurryCtrl', ['$scope','$rootScope','$http','$cookies','$cookieStore','$window','$location','sharedProperties',
+                                                    function ($scope,$rootScope,$http,$cookies,$cookieStore,$window,$location,sharedProperties) {   
 // https://final-ws-furrycare.herokuapp.com
-    $scope.editname = false;
-    $scope.editage = false;
-    $scope.editweight = false;
+    $scope.$on('yes',function(event, arg){
+            $scope.receiver = arg;
+            console.log(arg);
+    });
 
     console.log("user mail from cookies: "+$cookies.userMail);
 
-	$http.get('http://localhost:3000/getUser?userMail='+$cookies.userMail).success(function (data) {
-	       
+    $http.get('http://localhost:3000/getUser?userMail='+$cookies.userMail).success(function (data) {
+           
         console.log(data);
         $scope.user = data;
         console.log("user name : "+$scope.user.userName);
-        $scope.updateCurrentAnimal();             
-	});
-
-    $scope.updateCurrentAnimal = function() {
+        //if ( typeof $scope.user.animals !== 'undefined') {
         var len = $scope.user.animals.length;    
         if (len > 0) {
-            console.log("number of animals in array : "+len);
+            console.log(len);
             $scope.currAnimal = $scope.user.animals[len-1];
             console.log("curr: "+$scope.currAnimal.animalName);
         } else
-               $scope.currAnimal = $scope.user.animals[0]; 
-    }
+               $scope.currAnimal = $scope.user.animals[0];               
+    });
 
     $scope.checkSelectedAnimal = function(id) {
         //console.log("id= "+id); 
@@ -171,53 +211,25 @@ furrycareApp.controller('FurryCtrl', ['$scope','$http','$cookies','$cookieStore'
                 console.log("no need to update in db.");
             return;
         }
-    }   
-
-    $scope.deleteAnimal = function() {
-        console.log("delete animal name :"+$scope.currAnimal.animalName);
-        $http.get('http://localhost:3000/deleteAnimal?animalId='+$scope.currAnimal._id)
-            .success(function (data){
-                $scope.user = data;
-                console.log(data);
-                console.log($scope.currAnimal.animalName);
-                // update new current animal because last current animal was deleted.
-                $scope.updateCurrentAnimal();
-        });
     }
-
-    $scope.createNoti = function(type,name,dateToExp) {
-        console.log("create notification to vaccination or to care.");
-        console.log(dateToExp);
-        var dateObj = new Date(dateToExp);
-        // push the notification to db
-        $http.get('http://localhost:3000/setNewAlarm?alarmtype='+type+'&alarmname='+name+'&expdate='+dateObj)
-                .success(function (data){
-                    $scope.user = data;
-        });
-
-    };
-    $scope.createFoodNoti = function(type,name,weight,dailyUse) {
-        console.log("create notification to food.");
-        console.log(type);
-        daysleft = (weight * 1000) / dailyUse;
-        var dateToExp = new Date();
-        dateToExp.setDate(dateToExp.getDate() + daysleft); 
-        console.log(dateToExp);
-        // push the notification to db
-        $http.get('http://localhost:3000/setNewAlarm?alarmtype='+type+'&alarmname='+name+'&expdate='+dateToExp).success(function (data){
-            $scope.user = data;
-        });
-    };
 
 }]);
 
-furrycareApp.controller('NewAnimalCtrl', function ($scope,$http) {
+//furrycareApp.controller('NewAnimalCtrl', function ($scope,$http) {
+
+
+//furrycareApp.controller('ListController', function ($scope) {
+furrycareApp.controller('animalCtrl', function ($scope) {
+
+ 
+
      $scope.animal = {
                 animalName: '',
                 animalAge: '',
                 animalWeight: '',
                 animalPic: 'animal1.png'
             };
+
     $scope.addNewAnimal = function() {
         console.log("name: "+ $scope.animal.animalName);
         console.log("age: "+ $scope.animal.animalAge);
@@ -229,15 +241,11 @@ furrycareApp.controller('NewAnimalCtrl', function ($scope,$http) {
             .success(function (data){
                 console.log("set new animal successfully...");
                 console.log(data);  
-                window.location.href = "index.html"; 
+                window.location.href = "index.html#/home"; 
                 console.log("after redirect...");
         });
-       
     };
-});
 
-furrycareApp.controller('ListController', function ($scope) {
-    
     $scope.open = function(item){
         if ($scope.isOpen(item)){
             $scope.opened = undefined;
@@ -259,8 +267,38 @@ furrycareApp.controller('ListController', function ($scope) {
     };
 });    
 
+furrycareApp.controller('notificationCtrl', function ($scope) {
+/*
+ $scope.createNoti = function(type,name,dateToExp) {
+        console.log("create notification to vaccination or to care.");
+        console.log(dateToExp);
+        var dateObj = new Date(dateToExp);
+        // push the notification to db
+        $http.get('http://localhost:3000/setNewAlarm?alarmtype='+type+'&alarmname='+name+'&expdate='+dateObj)
+                .success(function (data){
+                    $scope.user = data;
+        });
+
+    };
+    $scope.createFoodNoti = function(type,name,weight,dailyUse) {
+        console.log("create notification to food.");
+        console.log(type);
+        daysleft = (weight * 1000) / dailyUse;
+        var dateToExp = new Date();
+        dateToExp.setDate(dateToExp.getDate() + daysleft); 
+        console.log(dateToExp);
+        // push the notification to db
+        $http.get('http://localhost:3000/setNewAlarm?alarmtype='+type+'&alarmname='+name+'&expdate='+dateToExp).success(function (data){
+            $scope.user = data;
+        });
+    };*/
+
+});
+/*
 furrycareApp.controller('ItemController', function ($scope) {
 
 });
+*/
+
 
 
