@@ -11,7 +11,6 @@ app.get('/getUser',function(req,res){
 	var query = url_parts.query;
 	var userMail = query.userMail;
 	console.log("user mail: "+userMail+"\n");
-	// 
 	authenticateUser.getUser(userMail, function(err,data) {
 		console.log("error on getUser from server... " + err);
 		if (err)

@@ -1,0 +1,128 @@
+<section id="simple_details">
+	<section> <!-- name field -->
+		<section class="simple_detail_edit_img" ng-click="editDetailClicked('animalName')"
+				 ng-class="{'edit_mode' : editname}"> 
+		</section>
+		<section class="simple_detail_desc"> 
+			<section> <input ng-readonly="editname==false" ng-model="currAnimal.animalName"> 
+			</section> 
+			<section ng-if="isInEditMode('animalName')" ng-click="doneEditClicked('animalName')"> 
+				DONE </section>
+		</section>
+		<div class="clear"></div>
+	</section>
+	<section> <!-- age field -->
+		<section class="simple_detail_edit_img" ng-click="editDetailClicked('animalAge')"
+				 ng-class="{'edit_mode' : editage}">  
+		</section>
+		<section class="simple_detail_desc"> 
+			<section> Age :
+				<input ng-readonly="editage==false" ng-model="currAnimal.animalAge">
+			</section> 
+			<section ng-if="isInEditMode('animalAge')" ng-click="doneEditClicked('animalAge')"> 
+				DONE </section>
+		</section>
+		<div class="clear"></div>
+	</section>
+	<section> <!-- weight field -->
+		<section class="simple_detail_edit_img" ng-click="editDetailClicked('animalWeight')"
+				 ng-class="{'edit_mode' : editweight}">   
+		</section>
+		<section class="simple_detail_desc"> 
+			<section> Weight :
+				<input ng-readonly="editweight==false" ng-model="currAnimal.animalWeight">
+			</section> 
+			<section ng-if="isInEditMode('animalWeight')" ng-click="doneEditClicked('animalWeight')"> 	
+				DONE </section>
+		</section>
+		<div class="clear"></div>
+	</section>			
+</section>
+<section id="complex_details">
+		<section class="scroll_list">
+			<ul>
+			    <li class="scroll_list_title">
+			    	<section> Vaccination Header </section>
+			    	<!--<section> 
+			    		<img src="images/add.png" 
+			    		ng-click="createNoti('Vaccination','vacName','2015-07-02')"> 
+			    	</section> -->
+			    	<div class="clear"></div>
+			    </li>
+			    <ng-switch on="anyItemOpen()">
+			    <section ng-switch-when="true" 
+			    			ng-repeat="vaccination in currAnimal.animalVaccination">
+			       	<article class="scroll_list_item">
+			       		<section><img src="images/vaccination.png"></section>
+			       		<section>
+			       			<section>
+			       				<section class="edit_button"><img src="images/edit.png"></section>
+			       			</section>
+			       			<section class="scroll_list_row_details">{{vaccination.vaccinationName}}</section>
+			       			<section class="scroll_list_row_details">Date: {{vaccination.vaccinationDate | date:'MM/dd/yy'}} ,Exp: {{vaccination.vaccinationExpire | date:'MM/dd/yy'}}</section>
+			       		</section>	  	  
+			       		<div class="clear"></div>
+			       	</article> 
+			     </section>
+			    </ng-switch> 
+			    <li class="scroll_list_arrow">
+			       <section ng-click='open("open")'><img src="images/arrow_down.png"></section>        
+				</li>  
+			</ul>
+			<ul>
+			    <li class="scroll_list_title">
+			    	<section> Food Header </section>
+			    	<section> <img src="images/add.png" ng-click="createFoodNoti('111TOM','furina','1','200')"> </section>
+			    	<div class="clear"></div>
+			    </li>
+			    <ng-switch on="anyItemOpen()">
+			    <section ng-switch-when="true" 
+			    			ng-repeat="food in currAnimal.animalFood">
+			       	<article class="scroll_list_item">
+			       		<section><img src="images/food.png"></section>
+			       		<section>
+			       			<section>
+			       				<section class="edit_button"><img src="images/edit.png"></section>
+			       			</section>
+			       			<section class="scroll_list_row_details">{{food.foodName}} , {{food.foodBrand}}</section>
+			       			<section class="scroll_list_row_details">{{food.foodBagPrice}} $ per bag</section>
+			       		</section>	  	  
+			       		<div class="clear"></div>
+			       	</article> 
+			     </section>
+			    </ng-switch> 
+			    <li class="scroll_list_arrow">
+			       <section ng-click='open("open")'><img src="images/arrow_down.png"></section>        
+				</li>  
+			</ul>
+			<ul>
+			    <li class="scroll_list_title">
+			    	<section> Care Header </section>
+			    	<section> <img src="images/add.png" ng-click="createNoti('Care','CareName','10.6.15')"> </section>
+			    	<div class="clear"></div>
+			    </li>
+			    <ng-switch on="anyItemOpen()">
+			    <section ng-switch-when="true" 
+			    			ng-repeat="care in currAnimal.animalCare">
+			       	<article class="scroll_list_item">
+			       		<section><img src="images/care.png"></section>
+			       		<section>
+			       			<section>
+			       				<section class="edit_button"><img src="images/edit.png"></section>
+			       			</section>
+			       			<section class="scroll_list_row_details">{{care.careType}}</section>
+			       			<section class="scroll_list_row_details">Date: {{care.careDate | date:'MM/dd/yy'}}
+			       				<!-- , Exp: {{care.careExpire | date:'MM/dd/yy'}} --></section>
+			       		</section>	  	  
+			       		<div class="clear"></div>
+			       	</article> 
+			     </section>
+			    </ng-switch> 
+			    <li class="scroll_list_arrow">
+			       <section ng-click='open("open")'><img src="images/arrow_down.png"></section>        
+				</li>  
+			</ul>
+		</section>
+</section>
+
+<section id="delete_animal" ng-click="deleteAnimal()"> Delete animal

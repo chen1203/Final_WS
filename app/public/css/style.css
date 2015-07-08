@@ -56,13 +56,10 @@ a{
 		float: left;
 		text-align: center;
 	}
-	#main_nav a {
-		display: block;	
-		padding-top: 5px;
-	}
 	#main_nav img {
 		width: 20px;
 		height: 20px;
+		padding-top: 5px;
 	}
 	.active {
 		background: #000000;/*#6d6e71*/
@@ -104,14 +101,9 @@ a{
 		border-left: 1px solid #CBCBCB;
 		text-align: center;
 	}
-	#add_animal>a {
-		display: block;
-		height: 100%;
-		width: 100%;
-	}
-	#add_animal>a>img {
-		width: 65%;
-		height: 65%;
+	#add_animal img {
+		width: 75%;
+		height: 75%;
 		padding-top: 10%;
 	}
 	#simple_details {
