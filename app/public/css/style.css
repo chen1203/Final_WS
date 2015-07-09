@@ -280,14 +280,14 @@ a{
 	}
 	#loginIcon{
 		width: 100%;
-		padding: 25% 0 25% 0;
+		padding: 173px 0 147px 0;
 		text-align: center;
 	}
 	#loginForm{
 		text-align: center;
 	}
 	.textInput{
-		width: 75%;
+		width: 466px;
 		height: 78px;
 		padding-left: 10%;
 		margin-bottom: 26px;
