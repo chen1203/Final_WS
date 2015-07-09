@@ -26,7 +26,7 @@ a{
 	clear: both;
 }
 
-@media (max-width: 500px){	
+@media (max-width: 1440px){	
 	#wrapper{
 		width:100%;
 		margin:0 auto;
@@ -187,6 +187,9 @@ a{
 		font-family: Open Sans,arial,sans-serif;
 		font-size: 14px;
 	}
+	.open_scroll_list {
+		background-color: #f15d59;
+	}
 	.scroll_list_title>section {
 		padding-top: 5px;
 		float: left;
@@ -201,6 +204,18 @@ a{
 		width: 25px;
 		height: 25px;
 	}
+	.most_imp_detail {
+		width: 100%;
+		height: 70px;
+		border-bottom: 1px solid #CBCBCB;
+	}
+	.most_imp_detail img {
+		display: block;
+		width: 50px;
+		height: 50px;
+		margin: auto;
+		padding-top: 7px;
+	}
 	/* last li of section scroll_list */
 	.scroll_list_arrow {
 		width:100%;
@@ -213,6 +228,11 @@ a{
 	.scroll_list_arrow img {
 		width: 50px;
 		height: 30px;
+	}
+	.sub_title_complex_details {
+		width: 100%;
+		height: 30px;
+		border-bottom : 1px solid #CBCBCB;
 	}
 	/* all other sections  */
 	.scroll_list_item{

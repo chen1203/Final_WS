@@ -30,7 +30,15 @@ furrycareApp.controller('userCtrl', ['$scope','$rootScope','$http','$cookies','$
             return true;
         return false;
     };
-
+    /* reset all edit fields and opened scroll lists about current animal */
+    $scope.resetEditFields = function() {
+        $scope.currAnimal.editname = false;
+        $scope.currAnimal.editage = false;
+        $scope.currAnimal.editweight = false;
+        $scope.currAnimal.vaccOpened = undefined;
+        $scope.currAnimal.foodOpened = undefined;
+        $scope.currAnimal.careOpened = undefined; 
+    };
     $scope.updateCurrentAnimal = function(first_or_last) { 
         var len = $scope.user.animals.length;    
         if (len <= 1) {
@@ -39,12 +47,13 @@ furrycareApp.controller('userCtrl', ['$scope','$rootScope','$http','$cookies','$
         }
         if (first_or_last === "first") // len > 1
             $scope.currAnimal = $scope.user.animals[0];
-        else
+        else {
+            console.log("on updateCurrentAnimal else... len is : "+len);
             $scope.currAnimal = $scope.user.animals[len-1];
-
+        }
+        $scope.resetEditFields();
         console.log("curr animal name: "+$scope.currAnimal.animalName);
     };
-
     $scope.getUser = function() {
         console.log("getUser is called!!! so the user is updated!");
         $http.get('http://localhost:3000/getUser?userMail='+$cookies.userMail).success(function (data) {
@@ -55,7 +64,6 @@ furrycareApp.controller('userCtrl', ['$scope','$rootScope','$http','$cookies','$
             $scope.updateCurrentAnimal("first");        
         });
     };
-
     $scope.tries = 0; // need enter to func login()
     $scope.login = function() {    
         console.log("mail: "+ $scope.user.email);
@@ -100,23 +108,34 @@ furrycareApp.controller('userCtrl', ['$scope','$rootScope','$http','$cookies','$
                 }    
         });
     };
-
     $scope.initUserCtrl = function() {
         console.log("in userCtrl");
         if ($scope.isUserLogedIn()) {
             $scope.getUser();
             $scope.newAnimalClicked = false;
             $location.path("/animal");
-        } else
-            $scope.login();
+        }
+        /* else
+            $scope.login(); */
     };
 
     $scope.initUserCtrl();
-
+    
     $scope.isThisPageActive = function (pageName) {
         return $scope.page === pageName;
     };
-
+    $scope.editWithoutDoneFixed = function() {
+    /* the situation is that edit button pressed and maybe the field was changed,
+        but the 'done' button wasn't pressed, so the change won't save to db.
+        We want to return the previos name without refreshing the page so we do that. 
+    */
+        if ($scope.currAnimal.editname == true)
+            $scope.currAnimal.animalName = $scope.currAnimal.pre_name;  
+        if ($scope.currAnimal.editage == true)
+            $scope.currAnimal.animalAge = $scope.currAnimal.pre_age;
+        if ($scope.currAnimal.editweight == true)
+            $scope.currAnimal.animalWeight = $scope.currAnimal.pre_weight;
+    };
     $scope.selectedPage = function (pageName) {
         $scope.page = pageName;
         // if we are in noti page, and someone change the db from mongo directly.
@@ -129,19 +148,23 @@ furrycareApp.controller('userCtrl', ['$scope','$rootScope','$http','$cookies','$
         $scope.newAnimalClicked = false;
         $location.path("/"+$scope.page);
     };
-
     $scope.checkSelectedAnimal = function(id) {
         //console.log("id= "+id);
-        angular.forEach($scope.user.animals, function(animal) {
-            if (animal._id == id) {
-                $scope.currAnimal = animal;
-            } 
-        });
+        if (!$scope.newAnimalClicked) { // if we are not in new_animal page
+            angular.forEach($scope.user.animals, function(animal) {
+                if (animal._id == id) {
+                    $scope.editWithoutDoneFixed();
+                    $scope.currAnimal = animal;
+                    $scope.resetEditFields();
+                } 
+            });
+        }
     };
     $scope.isThisAnimalActive = function(nowSelectedAnimalLink) {
+        if ($scope.newAnimalClicked)
+            return false;
         return $scope.currAnimal._id === nowSelectedAnimalLink;
     };
-
     $scope.moveToAddNewAnimalPage = function() {
         console.log("moveToAddNewAnimalPage");
         $scope.newAnimalClicked = true;
@@ -151,51 +174,60 @@ furrycareApp.controller('userCtrl', ['$scope','$rootScope','$http','$cookies','$
 }]);
 
 furrycareApp.controller('animalCtrl', ['$scope','$rootScope','$http','$cookies','$cookieStore','$window','$location',
-                                                    function ($scope,$rootScope,$http,$cookies,$cookieStore,$window,$location) { 
-    $scope.editname = false;
-    $scope.editage = false;
-    $scope.editweight = false;                       
+                                                    function ($scope,$rootScope,$http,$cookies,$cookieStore,$window,$location) {                      
+
+    console.log("from animalCtrl..");
+    // this just for the first time..
+    if (typeof $scope.$parent.currAnimal === 'undefined') {
+        $scope.$parent.currAnimal = {
+            editname : false,
+            editage : false,
+            editweight : false,
+            vaccOpened : undefined,
+            foodOpened : undefined,
+            careOpened : undefined
+        };
+    }
     /* edit button of simple detail of current animal was clicked : name/age/weight */
     $scope.editDetailClicked = function(detail) {
         console.log(detail);
 
         if (detail === "animalName") {
-            $scope.pre_name = $scope.currAnimal.animalName;
-            $scope.editname = true;
+            //console.log("curr animal name: "+$scope.currAnimal.animalName);
+            $scope.$parent.currAnimal.pre_name = $scope.$parent.currAnimal.animalName;
+            $scope.$parent.currAnimal.editname = true;
             return;
         }
         if (detail === "animalAge") {
-            $scope.pre_age = $scope.currAnimal.animalAge;
-            $scope.editage = true;
+            $scope.$parent.currAnimal.pre_age = $scope.$parent.currAnimal.animalAge;
+            $scope.$parent.currAnimal.editage = true;
             return;
         }
         if (detail === "animalWeight") {
-            $scope.pre_weight = $scope.currAnimal.animalWeight;
-            $scope.editweight = true;
+            $scope.$parent.currAnimal.pre_weight = $scope.$parent.currAnimal.animalWeight;
+            $scope.$parent.currAnimal.editweight = true;
             return;
         }
     };
 
     $scope.isInEditMode = function(detail) {
         if (detail === "animalName")
-            return $scope.editname;
+            return $scope.$parent.currAnimal.editname;
         if (detail === "animalAge") 
-            return $scope.editage;
+            return $scope.$parent.currAnimal.editage;
         if (detail === "animalWeight")
-            return $scope.editweight;
+            return $scope.$parent.currAnimal.editweight;
     };
     /* done editing button of simple detail of current animal was clicked : name/age/weight */
     $scope.doneEditClicked = function(detail) {
         if (detail === "animalName") {
-            $scope.editname = false;
-            console.log("edit name: "+$scope.currAnimal.animalName);
-            if ($scope.currAnimal.animalName !== $scope.pre_name) {
+            $scope.$parent.currAnimal.editname = false;
+            if ($scope.$parent.currAnimal.animalName !== $scope.$parent.currAnimal.pre_name) {
                 console.log("new name.. need update in db.");
                 // update in db
-                $http.get('http://localhost:3000/setAnimalField?field='+detail+'&animalId='+$scope.currAnimal._id+
-                    '&animalNewVal='+$scope.currAnimal.animalName)
+                $http.get('http://localhost:3000/setAnimalField?field='+detail+'&animalId='+$scope.$parent.currAnimal._id+
+                    '&animalNewVal='+$scope.$parent.currAnimal.animalName)
                     .success(function (data){
-
                         $scope.$parent.user = data;
                 });
             }
@@ -204,13 +236,13 @@ furrycareApp.controller('animalCtrl', ['$scope','$rootScope','$http','$cookies',
             return;
         }
         if (detail === "animalAge") {
-            $scope.editage = false;
-            console.log("edit age: "+$scope.currAnimal.animalAge);
-            if ($scope.currAnimal.animalAge !== $scope.pre_age) {
+            $scope.$parent.currAnimal.editage = false;
+            console.log("edit age: "+$scope.$parent.currAnimal.animalAge);
+            if ($scope.$parent.currAnimal.animalAge !== $scope.$parent.currAnimal.pre_age) {
                 console.log("new age.. need update in db.");
                 // update in db
-                $http.get('http://localhost:3000/setAnimalField?field='+detail+'&animalId='+$scope.currAnimal._id+
-                    '&animalNewVal='+$scope.currAnimal.animalAge)
+                $http.get('http://localhost:3000/setAnimalField?field='+detail+'&animalId='+$scope.$parent.currAnimal._id+
+                    '&animalNewVal='+$scope.$parent.currAnimal.animalAge)
                     .success(function (data){
                         $scope.$parent.user = data;
                 });
@@ -220,13 +252,13 @@ furrycareApp.controller('animalCtrl', ['$scope','$rootScope','$http','$cookies',
             return;
         }
         if (detail === "animalWeight") {
-            $scope.editweight = false;
-            console.log("edit weight: "+$scope.currAnimal.animalWeight);
-            if ($scope.currAnimal.animalWeight !== $scope.pre_weight) {
+            $scope.$parent.currAnimal.editweight = false;
+            console.log("edit weight: "+$scope.$parent.currAnimal.animalWeight);
+            if ($scope.$parent.currAnimal.animalWeight !== $scope.$parent.currAnimal.pre_weight) {
                 console.log("new weight.. need update in db.");
                 // update in db
-                 $http.get('http://localhost:3000/setAnimalField?field='+detail+'&animalId='+$scope.currAnimal._id+
-                    '&animalNewVal='+$scope.currAnimal.animalWeight)
+                 $http.get('http://localhost:3000/setAnimalField?field='+detail+'&animalId='+$scope.$parent.currAnimal._id+
+                    '&animalNewVal='+$scope.$parent.currAnimal.animalWeight)
                     .success(function (data){
                         $scope.$parent.user = data;
                 });
@@ -258,36 +290,86 @@ furrycareApp.controller('animalCtrl', ['$scope','$rootScope','$http','$cookies',
     };
     /* delete the current animal from animals of the user */
     $scope.deleteAnimal = function() {
-        console.log("delete animal name :"+$scope.currAnimal.animalName);
-        $http.get('http://localhost:3000/deleteAnimal?animalId='+$scope.currAnimal._id)
+        console.log("delete animal name :"+$scope.$parent.currAnimal.animalName);
+        $http.get('http://localhost:3000/deleteAnimal?animalId='+$scope.$parent.currAnimal._id)
             .success(function (data){
                 $scope.$parent.user = data;
                 console.log(data);
-                console.log($scope.currAnimal.animalName);
+                console.log($scope.$parent.currAnimal.animalName);
                 // update new current animal because last current animal was deleted.
                 $scope.$parent.updateCurrentAnimal("first");
         });
     };
 
-    $scope.open = function(item){
-        if ($scope.isOpen(item)){
-            $scope.opened = undefined;
+    $scope.openVaccList = function(item){
+        if ($scope.isVaccOpen(item)){
+            $scope.$parent.currAnimal.vaccOpened = undefined;
         } else {
-            $scope.opened = item;
+            $scope.$parent.currAnimal.vaccOpened = item;
         }        
     };
-    
-    $scope.isOpen = function(item){
-        return $scope.opened === item;
+    $scope.openFoodList = function(item){
+        if ($scope.isFoodOpen(item)){
+            $scope.$parent.currAnimal.foodOpened = undefined;
+        } else {
+            $scope.$parent.currAnimal.foodOpened = item;
+        }        
     };
-    
-    $scope.anyItemOpen = function() {
-        return $scope.opened !== undefined;
+    $scope.openCareList = function(item){
+        if ($scope.isCareOpen(item)){
+            $scope.$parent.currAnimal.careOpened = undefined;
+        } else {
+            $scope.$parent.currAnimal.careOpened = item;
+        }        
     };
-    
-    $scope.close = function() {
-        $scope.opened = undefined;
+    $scope.isVaccOpen = function(item){
+        return $scope.$parent.currAnimal.vaccOpened === item;
     };
+    $scope.isFoodOpen = function(item){
+        return $scope.$parent.currAnimal.foodOpened === item;
+    };
+    $scope.isCareOpen = function(item){
+        return $scope.$parent.currAnimal.careOpened === item;
+    };
+    $scope.vaccItemOpen = function() {
+        return $scope.$parent.currAnimal.vaccOpened !== undefined;
+    };
+    $scope.foodItemOpen = function() {
+        return $scope.$parent.currAnimal.foodOpened !== undefined;
+    };
+    $scope.careItemOpen = function() {
+        return $scope.$parent.currAnimal.careOpened !== undefined;
+    };
+    $scope.closeVaccList = function() {
+        $scope.$parent.currAnimal.vaccOpened = undefined;
+    };
+    $scope.closeFoodList = function() {
+        $scope.$parent.currAnimal.foodOpened = undefined;
+    };
+    $scope.closeCareList = function() {
+        $scope.$parent.currAnimal.careOpened = undefined;
+    };
+    $scope.isVaccListIsEmpty = function() {
+        if ($scope.$parent.currAnimal.animalVaccination.length == 0)
+            return true;
+        return false;
+    };
+    $scope.isFoodListIsEmpty = function() {
+        if ($scope.$parent.currAnimal.animalFood.length == 0)
+            return true;
+        return false;
+    };
+    $scope.isCareListIsEmpty = function() {
+        if ($scope.$parent.currAnimal.animalCare.length == 0)
+            return true;
+        return false;
+    };
+   /* $scope.closeAllScrollLists = function() {
+        $scope.vaccOpened = undefined;
+        $scope.foodOpened = undefined;
+        $scope.careOpened = undefined;
+    };*/
+
 }]); 
 
 furrycareApp.controller('notificationCtrl', function ($scope) {
