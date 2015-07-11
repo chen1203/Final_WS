@@ -174,3 +174,69 @@ exports.deleteAnimal = function(req,res){
         }
     });
 };
+
+/*
+ function for
+  */
+function createRecordDB(recType,animalId,recName,recReceivedDate,recExpDate,callback) {
+    var authenticateUser = userCon.getAuthenticateUser();
+    console.log("on createRecordDB: "+recType);
+    var query = userM.findOne({'email':authenticateUser.email});
+    
+    /* vaccination or care record */
+    var rec = {
+        name: recName,
+        receivedDate: recReceivedDate,
+        expDate: recExpDate
+    };
+    query.exec(function(err,doc) {
+        if (err)
+            console.log("error on create new record :\n "+err);
+        else {
+            /*console.log("user id : "+doc._id);
+            console.log("animal id: "+animalId);
+            console.log("animal new value: "+animalNewVal);
+            */
+            
+            //var pushQuery = doc.update({$push:{recType:rec}});
+
+            var pushQuery = userM.findOneAndUpdate(
+                        { "_id" : doc._id, "animals._id" : animalId},
+                        { "$push" : {"animals.$.animalVaccination":rec}}
+                );
+            pushQuery.exec(function(err, results) {
+                console.log("Number of updated values: "+results);
+                // update the 'authenticateUser' from mongo
+                userM.findOne({'email':authenticateUser.email}, function(err, doc2) {
+                    authenticateUser = doc2;
+                    console.log("doc: " + authenticateUser);
+                    callback(err,authenticateUser);
+                });
+            });
+        }
+    });
+}
+
+exports.createRec = function(req,res){
+    //console.log("animal controller - setAnimalField()");
+    var url_parts = url.parse(req.url, true);
+    var query = url_parts.query;
+    
+    var recType = query.recType;
+    var animalId = query.currAnimalId;
+    var recName = query.recName;
+    var recReceivedDate = query.recReceivedDate;
+    var recExpiredDate = query.recExpiredDate;
+
+    //console.log("update animal "+field+" to: "+animalNewVal+"\n");
+    // update animal field to db here!!
+    createRecordDB(recType,animalId,recName,recReceivedDate,recExpiredDate, function(err,data) {
+        if (err)
+            res.send(500, "something went wrong: "+err);
+        else {
+            // we return the updated user
+            res.status(200)
+            res.json(data);
+        }
+    });
+};

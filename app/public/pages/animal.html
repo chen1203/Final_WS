@@ -38,7 +38,7 @@
 		<div class="clear"></div>
 	</section>			
 </section>
-<section id="complex_details">
+<section id="complex_details"> <!-- ng-controller="notificationCtrl" -->
 		<section class="scroll_list">
 			<!-- vaccination details on the current animal -->
 			<ul>
@@ -61,23 +61,23 @@
 					    </section>
 					     <!-- new vaccination form will be displayed if the list is empty-->
 						<section ng-hide="!isVaccListIsEmpty()">
-							<form class="new_complex_details_form">
+							<form class="new_complex_details_form" ng-submit="createRec('animalVaccination')">
 								<p>
 									<img>
-									<label> Type:  </label>
-									<input type="text" name="type"> <!-- ng-model="" -->
+									<label> Name:  </label>
+									<input type="text" name="notiName" ng-model="record.recName">
 									<div class="clear"></div>
 								</p>
 								<p>
 									<img>
 									<label> Received:  </label>
-									<input type="date" name="received"> <!-- ng-model="" -->
+									<input type="date" name="received" ng-model="record.recReceivedDate">
 									<div class="clear"></div>
 								</p>
 								<p>
 									<img>
 									<label> Expired:  </label>
-									<input type="date" name="expired"> <!-- ng-model="" -->
+									<input type="date" name="expired" ng-model="record.recExpiredDate">
 									<div class="clear"></div>
 								</p>
 								<input type="submit" value="Done">
@@ -91,8 +91,8 @@
 					       			<section>
 					       				<section class="edit_button"><img src="images/edit.png"></section>
 					       			</section>
-					       			<section class="scroll_list_row_details">{{vaccination.vaccinationName}}</section>
-					       			<section class="scroll_list_row_details">Date: {{vaccination.vaccinationDate | date:'MM/dd/yy'}} ,Exp: {{vaccination.vaccinationExpire | date:'MM/dd/yy'}}</section>
+					       			<section class="scroll_list_row_details">{{vaccination.name}}</section>
+					       			<section class="scroll_list_row_details">Date: {{vaccination.receivedDate | date:'MM/dd/yy'}} ,Exp: {{vaccination.expDate | date:'MM/dd/yy'}}</section>
 					       		</section>	  	  
 					       		<div class="clear"></div>
 					       	</article> 

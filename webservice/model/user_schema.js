@@ -21,17 +21,27 @@ var userSchema = new schema({
                 }
             ],
             animalVaccination: [
-                {
+                /*{
                     vaccinationDate: {type: Date, default: Date.now},
                     vaccinationName: {type: String},
                     vaccinationExpire: {type: Date}
+                }*/
+                {
+                    name: {type: String},
+                    receivedDate: {type: Date, default: Date.now},
+                    expDate: {type: Date}
                 }
             ],
             animalCare: [
-                {
+                /*{
                     careDate: {type: Date, default: Date.now},
                     careType:  {type: String},
                    	careExpire:  {type: Date}
+                }*/
+                {
+                    name: {type: String},
+                    receivedDate: {type: Date, default: Date.now},
+                    expDate: {type: Date}
                 }
             ],
             animalService: [
@@ -47,9 +57,11 @@ var userSchema = new schema({
     ],
     alarms: [ 
         { 
-            alarmName: {type: String, required: true}, 
-            alarmType: {type: String, required: true},
-            alarmDate: {type: Date, required: true}
+            notiAnimals: [],
+            notiType: {type: String},
+            notiName: {type: String, required: true}, 
+            notiReceivedDate: {type: String, required: true},
+            notiExpiredDate: {type: Date, required: true}
         }
     ]
 

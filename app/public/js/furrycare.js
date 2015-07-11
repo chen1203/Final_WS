@@ -220,53 +220,30 @@ furrycareApp.controller('animalCtrl', ['$scope','$rootScope','$http','$cookies',
     };
     /* done editing button of simple detail of current animal was clicked : name/age/weight */
     $scope.doneEditClicked = function(detail) {
+        var val,pre_val;
         if (detail === "animalName") {
             $scope.$parent.currAnimal.editname = false;
-            if ($scope.$parent.currAnimal.animalName !== $scope.$parent.currAnimal.pre_name) {
-                console.log("new name.. need update in db.");
-                // update in db
-                $http.get('http://localhost:3000/setAnimalField?field='+detail+'&animalId='+$scope.$parent.currAnimal._id+
-                    '&animalNewVal='+$scope.$parent.currAnimal.animalName)
-                    .success(function (data){
-                        $scope.$parent.user = data;
-                });
-            }
-            else 
-                console.log("no need to update in db.");
-            return;
+            val = $scope.$parent.currAnimal.animalName;
+            pre_val = $scope.$parent.currAnimal.pre_name;
         }
-        if (detail === "animalAge") {
+        else if (detail === "animalAge") {
             $scope.$parent.currAnimal.editage = false;
-            console.log("edit age: "+$scope.$parent.currAnimal.animalAge);
-            if ($scope.$parent.currAnimal.animalAge !== $scope.$parent.currAnimal.pre_age) {
-                console.log("new age.. need update in db.");
-                // update in db
-                $http.get('http://localhost:3000/setAnimalField?field='+detail+'&animalId='+$scope.$parent.currAnimal._id+
-                    '&animalNewVal='+$scope.$parent.currAnimal.animalAge)
-                    .success(function (data){
-                        $scope.$parent.user = data;
-                });
-            }
-            else 
-                console.log("no need to update in db.");
-            return;
-        }
-        if (detail === "animalWeight") {
+            val = $scope.$parent.currAnimal.animalAge;
+            pre_val = $scope.$parent.currAnimal.pre_age;
+        } else if (detail === "animalWeight") {
             $scope.$parent.currAnimal.editweight = false;
-            console.log("edit weight: "+$scope.$parent.currAnimal.animalWeight);
-            if ($scope.$parent.currAnimal.animalWeight !== $scope.$parent.currAnimal.pre_weight) {
-                console.log("new weight.. need update in db.");
-                // update in db
-                 $http.get('http://localhost:3000/setAnimalField?field='+detail+'&animalId='+$scope.$parent.currAnimal._id+
-                    '&animalNewVal='+$scope.$parent.currAnimal.animalWeight)
+            val = $scope.$parent.currAnimal.animalWeight;
+            pre_val = $scope.$parent.currAnimal.pre_weight;
+        }
+        if (val !== pre_val) {
+            console.log("doneEditClicked....");
+            $http.get('http://localhost:3000/setAnimalField?field='+detail+'&animalId='+$scope.$parent.currAnimal._id+
+                    '&animalNewVal='+rec)
                     .success(function (data){
                         $scope.$parent.user = data;
                 });
-            }
-            else 
+        } else 
                 console.log("no need to update in db.");
-            return;
-        }
     };
     /* add animal button was clicked */
     $scope.addNewAnimal = function() {
@@ -369,20 +346,44 @@ furrycareApp.controller('animalCtrl', ['$scope','$rootScope','$http','$cookies',
         $scope.foodOpened = undefined;
         $scope.careOpened = undefined;
     };*/
+    $scope.record = {
+        recName : '',
+        recReceivedDate : '',
+        recExpiredDate : ''
+    };
+    $scope.createRec = function (type) {
+        console.log("details of new :"+type+" : ");
+        console.log($scope.$parent.currAnimal._id);
+        console.log($scope.record.recName);
+        console.log($scope.record.recReceivedDate);
+        console.log($scope.record.recExpiredDate);
+        $http.get('http://localhost:3000/createRec?recType='+type+'&currAnimalId='+$scope.$parent.currAnimal._id
+            +'&recName='+$scope.record.recName+'&recReceivedDate='+new Date($scope.record.recReceivedDate)
+            +'&recExpiredDate='+new Date($scope.record.recExpiredDate))
+            .success(function (data){
+                $scope.$parent.user = data;
+                $scope.$parent.updateCurrentAnimal("first"); // maybe not first and send the number in the array :|
+        }); 
+    };
 
 }]); 
 
-furrycareApp.controller('notificationCtrl', function ($scope) {
+furrycareApp.controller('notificationCtrl', function ($scope,$http) {
+    $scope.noti = {
+       notiName : '',
+        receivedDate : '',
+        expiredDate : ''
+    };
 
-/*
- $scope.createNoti = function(type,name,dateToExp) {
+
+    $scope.createNoti = function() {
         console.log("create notification to vaccination or to care.");
-        console.log(dateToExp);
-        var dateObj = new Date(dateToExp);
         // push the notification to db
-        $http.get('http://localhost:3000/setNewAlarm?alarmtype='+type+'&alarmname='+name+'&expdate='+dateObj)
-                .success(function (data){
-                    $scope.user = data;
+        $http.get('http://localhost:3000/setNewAlarm?alarmName='+$scope.noti.notiName
+            +'&alarmReceivedDate='+new Date($scope.noti.receivedDate)
+            +'&alarmExpiredDate='+new Date($scope.noti.expiredDate))
+            .success(function (data){
+                $scope.$parent.user = data;
         });
 
     };
@@ -394,10 +395,11 @@ furrycareApp.controller('notificationCtrl', function ($scope) {
         dateToExp.setDate(dateToExp.getDate() + daysleft); 
         console.log(dateToExp);
         // push the notification to db
-        $http.get('http://localhost:3000/setNewAlarm?alarmtype='+type+'&alarmname='+name+'&expdate='+dateToExp).success(function (data){
-            $scope.user = data;
+        $http.get('http://localhost:3000/setNewAlarm?alarmtype='+type+'&alarmname='+name+'&expdate='+dateToExp)
+            .success(function (data){
+                $scope.$parent.user = data;
         });
-    };*/
+    };
 
 });
 
