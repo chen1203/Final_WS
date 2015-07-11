@@ -14,7 +14,6 @@ module.exports = function(app){
     app.get('/setNewAlarm',notificationRoutes.setNewNotification);
 
 
-
     app.get('/setNewAnimal',animalRoutes.setNewAnimal);
     app.get('/setAnimalField',animalRoutes.setAnimalField);
     app.get('/deleteAnimal',animalRoutes.deleteAnimal);
