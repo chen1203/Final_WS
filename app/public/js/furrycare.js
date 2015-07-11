@@ -26,8 +26,8 @@ furrycareApp.controller('userCtrl', ['$scope','$rootScope','$http','$cookies','$
 
     $scope.isUserLogedIn = function() {
         //console.log("on logedIn...");
-        //if (typeof $cookies.userMail !== 'undefined') 
-        //    return true;
+        if (typeof $cookies.userMail !== 'undefined') 
+            return true;
         return false;
     };
     /* reset all edit fields and opened scroll lists about current animal */
