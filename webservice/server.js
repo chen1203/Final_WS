@@ -1,6 +1,4 @@
 
-
-
 // get the configuration mongoose and express
  var mongoose = require('./config/mongooseConfig'),
 	 express = require('./config/expressConfig');
