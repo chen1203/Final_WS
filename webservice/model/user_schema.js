@@ -55,4 +55,5 @@ var userSchema = new schema({
 
 	}, {collection: 'furrycare'});
 
-exports.userSchema = userSchema;
+mongoose.model('User',userSchema);
+//exports.userSchema = userSchema;

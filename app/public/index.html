@@ -14,7 +14,7 @@
     </head>
 
     <body ng-app="furrycareApp" ng-controller="userCtrl">
-      <section ng-hide="!isUserLogedIn()">
+      <section ng-hide="isUserLogedIn()">
         <div id="wrapper">
           <header>
             <section id="title_section"> <h1> FURRYCARE </h1> </section>
@@ -58,7 +58,7 @@
       </section>
 
       <!-- login page -->
-      <section id="login_page" ng-hide="isUserLogedIn()">
+      <section id="login_page" ng-hide="!isUserLogedIn()">
         <div id="wrapper" class="login_body">
           <header>
           </header>
